@@ -2,390 +2,172 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entrenadores PF</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--text:#17202a;--muted:#6b7280;--primary:#111827;--accent:#2563eb;--danger:#dc2626;--border:#e5e7eb}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-header{background:var(--primary);color:#fff;padding:18px 20px;position:sticky;top:0;z-index:10}.header{max-width:1100px;margin:auto}.logo{font-size:22px;font-weight:800}.subtitle{font-size:12px;opacity:.75}
-main{max-width:1100px;margin:auto;padding:20px}nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700;background:#e5e7eb;color:#111827}
-button.primary{background:var(--accent);color:#fff}button.danger{background:#fee2e2;color:var(--danger)}button.active{background:var(--primary);color:#fff}button.small{padding:7px 10px;font-size:13px}
-.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 2px 8px #00000008}.card h3{margin:0 0 8px}
-.number{font-size:30px;font-weight:800}.muted{color:var(--muted);font-size:14px}form{display:grid;gap:10px;max-width:700px}
-.row{display:flex;gap:10px;flex-wrap:wrap}input,select,textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:9px;font:inherit}.row>*{flex:1;min-width:160px}
-.actions{display:flex;gap:6px;flex-wrap:wrap}.exercise{display:block;padding:12px;border:1px solid var(--border);border-radius:10px;margin:8px 0;background:#fafafa}
-.empty{padding:30px;text-align:center;color:var(--muted)}.notice{padding:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;margin-bottom:15px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar input{flex:2;min-width:220px}.toolbar select{flex:1;min-width:170px}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;font-size:12px;font-weight:700;margin-bottom:8px}
-.quick{display:flex;justify-content:space-between;gap:10px;align-items:center}.quick h3{margin:0}.info{font-size:13px;color:var(--muted);margin-top:4px}
+:root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
+header{background:linear-gradient(135deg,#17152f 0%,#30236b 55%,#7c3aed 100%);color:#fff;padding:22px 20px;position:relative;overflow:hidden}header:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-70px;top:-110px;background:rgba(6,182,212,.22)}
+.header{max-width:1100px;margin:auto}.logo{font-size:25px;font-weight:800;letter-spacing:-.5px}.subtitle{font-size:14px;opacity:.85;margin-top:3px}
+main{max-width:1100px;margin:auto;padding:20px}nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;padding:6px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700;background:#eef0f5;color:#202236;transition:.18s}button:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(31,24,72,.10)}
+button.primary{background:linear-gradient(135deg,var(--accent),#5b21b6);color:#fff}button.danger{background:#fee2e2;color:#991b1b}button.active{background:linear-gradient(135deg,var(--primary2),var(--accent));color:#fff}
+.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.number{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.muted{color:var(--muted);font-size:14px}
+form{display:grid;gap:10px;max-width:760px}.row{display:flex;gap:10px;flex-wrap:wrap}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:9px;font:inherit;background:#fff}
+.row>*{flex:1;min-width:180px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-@media(max-width:600px){main{padding:12px}.quick{align-items:flex-start;flex-direction:column}}
-
-.exercise-img{width:100%;max-height:190px;object-fit:cover;border-radius:10px;margin:8px 0}
-.exercise-thumb{width:70px;height:55px;object-fit:cover;border-radius:8px;vertical-align:middle;margin-right:8px}
-.day-box{border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0;background:#fafafa}
+.quick{display:flex;gap:10px;align-items:center;margin:10px 0}.notice{padding:12px;background:#fff;border:1px solid var(--border);border-radius:10px}
+.exercise-img{width:100%;max-height:190px;object-fit:cover;border-radius:10px;margin:8px 0}.exercise-thumb{width:70px;height:55px;object-fit:cover;border-radius:8px;vertical-align:middle;margin-right:8px}
+.day-box{border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;background:#fafafa}
+.small{font-size:12px}.hidden{display:none!important}
+.hero{background:linear-gradient(135deg,#17152f 0%,#30236b 60%,#7c3aed 100%);color:#fff;border-radius:20px;padding:26px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 16px 40px rgba(48,35,107,.22)}.hero:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-80px;bottom:-120px;background:rgba(6,182,212,.25)}.hero h2{font-size:27px;margin:0 0 7px}.hero p{margin:0;max-width:650px;opacity:.88;line-height:1.5}.stat-card{position:relative;overflow:hidden}.stat-card:before{content:"";position:absolute;right:-25px;top:-25px;width:90px;height:90px;border-radius:50%;background:rgba(124,58,237,.08)}.stat-icon{font-size:24px;margin-bottom:4px}@media(max-width:600px){main{padding:12px}.row>*{min-width:100%}}
 </style>
 </head>
 <body>
 <header><div class="header"><div class="logo">Entrenadores PF</div><div class="subtitle" id="encabezadoPerfil">Gestión simple y rápida de rutinas para tus alumnos</div></div></header>
 <main>
-<nav>
+<nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
 <button data-view="alumnos">Alumnos</button>
 <button data-view="rutinas">Rutinas</button>
 <button data-view="ejercicios">Ejercicios</button>
-<button data-view="perfil">Mi perfil</button>
+<button data-view="perfil">Profesor / Gimnasio</button>
 </nav>
 
 <section id="inicio" class="view active">
-<h2>Panel principal</h2>
+<div class="hero"><h2>Entrená mejor. Organizá todo.</h2><p>Tu centro de trabajo para crear rutinas, gestionar alumnos y compartir planes de entrenamiento de forma rápida y profesional.</p></div>
 <div class="grid">
-<div class="card"><div class="muted">Alumnos</div><div class="number" id="countAlumnos">0</div></div>
-<div class="card"><div class="muted">Rutinas</div><div class="number" id="countRutinas">0</div></div>
-<div class="card"><div class="muted">Ejercicios</div><div class="number" id="countEjercicios">0</div></div>
+<div class="card stat-card"><div class="stat-icon">👥</div><div class="muted">Alumnos</div><div class="number" id="countAlumnos">0</div></div>
+<div class="card stat-card"><div class="stat-icon">📋</div><div class="muted">Rutinas</div><div class="number" id="countRutinas">0</div></div>
+<div class="card stat-card"><div class="stat-icon">🏋️</div><div class="muted">Ejercicios</div><div class="number" id="countEjercicios">0</div></div>
 </div>
-<div class="card" style="margin-top:15px"><h3>Bienvenido</h3><p>Biblioteca rápida de ejercicios, búsqueda por categoría y selección con un toque para armar rutinas.</p></div>
+<div class="card" style="margin-top:16px"><h3>🚀 Empezá ahora</h3><p>Creá tu primer alumno, armá su rutina y después compartila por WhatsApp o descargala en PDF. Todo queda guardado en este dispositivo.</p></div>
 </section>
 
 <section id="alumnos" class="view">
-<div class="section-title"><h2>Alumnos</h2><button class="primary" onclick="mostrarFormAlumno()">+ Nuevo alumno</button></div>
-<div id="formAlumno" class="card" style="display:none;margin-bottom:15px">
-<h3>Nuevo alumno</h3><form onsubmit="guardarAlumno(event)">
-<input id="nombreAlumno" placeholder="Nombre y apellido" required>
-<div class="row"><input id="telefonoAlumno" placeholder="WhatsApp / teléfono"><input id="objetivoAlumno" placeholder="Objetivo"></div>
-<div class="row"><button class="primary">Guardar</button><button type="button" onclick="ocultarFormAlumno()">Cancelar</button></div>
-</form></div><div id="listaAlumnos"></div>
-</section>
-
-<section id="rutinas" class="view">
-<div class="section-title"><h2>Rutinas</h2><button class="primary" onclick="mostrarFormRutina()">+ Nueva rutina</button></div>
-<div id="formRutina" class="card" style="display:none;margin-bottom:15px">
-<h3>Nueva rutina</h3><form onsubmit="guardarRutina(event)">
-<input id="nombreRutina" placeholder="Nombre de la rutina (ej. Rutina A - Fuerza)" required>
-<select id="alumnoRutina" required></select>
-<div class="row">
-<select id="tipoRutina"><option value="diaria">Rutina diaria</option><option value="semanal">Rutina semanal</option></select>
-<input id="fechaRutina" type="date" title="Fecha de la rutina diaria">
+<div class="section-title"><h2>Alumnos</h2><button class="primary" id="btnNuevoAlumno">+ Nuevo alumno</button></div>
+<div id="formAlumno" class="card hidden">
+<h3 id="tituloFormAlumno">Nuevo alumno</h3>
+<form id="alumnoForm">
+<input type="hidden" id="alumnoId">
+<div class="row"><input id="nombreAlumno" placeholder="Nombre y apellido" required><input id="telefonoAlumno" placeholder="WhatsApp (opcional)"></div>
+<div class="row"><input id="edadAlumno" type="number" placeholder="Edad"><input id="objetivoAlumno" placeholder="Objetivo"></div>
+<div class="actions"><button class="primary">Guardar alumno</button><button type="button" id="cancelarAlumno">Cancelar</button></div>
+</form>
 </div>
-<div id="semanaCampos" style="display:none">
-<div class="notice">Elegí los días de la semana para esta rutina.</div>
-<div class="row">
-<label><input type="checkbox" class="diaSemana" value="Lunes"> Lunes</label>
-<label><input type="checkbox" class="diaSemana" value="Martes"> Martes</label>
-<label><input type="checkbox" class="diaSemana" value="Miércoles"> Miércoles</label>
-<label><input type="checkbox" class="diaSemana" value="Jueves"> Jueves</label>
-<label><input type="checkbox" class="diaSemana" value="Viernes"> Viernes</label>
-<label><input type="checkbox" class="diaSemana" value="Sábado"> Sábado</label>
-<label><input type="checkbox" class="diaSemana" value="Domingo"> Domingo</label>
-</div></div>
-<textarea id="notasRutina" placeholder="Indicaciones generales"></textarea>
-<div class="notice">Buscá y filtrá los ejercicios y marcá los que querés agregar.</div>
-<div class="toolbar"><input id="buscarRutinaEjercicio" placeholder="🔎 Buscar ejercicio..." oninput="renderSelectorEjercicios()"><select id="categoriaRutinaEjercicio" onchange="renderSelectorEjercicios()"></select></div>
-<div id="ejerciciosSeleccionados"></div>
-<div class="row"><button class="primary">Guardar rutina</button><button type="button" onclick="ocultarFormRutina()">Cancelar</button></div>
-</form></div><div id="listaRutinas"></div>
+<div id="listaAlumnos" class="grid"></div>
 </section>
 
 <section id="ejercicios" class="view">
-<div class="section-title"><h2>Biblioteca de ejercicios</h2><button class="primary" onclick="mostrarFormEjercicio()">+ Crear ejercicio</button></div>
-<div class="toolbar"><input id="buscarEjercicio" placeholder="🔎 Buscar ejercicio..." oninput="renderEjercicios()"><select id="categoriaEjercicio" onchange="renderEjercicios()"></select></div>
-<div class="notice">Tocá <b>Agregar</b> en un ejercicio preparado y quedará guardado en tu biblioteca. Después podés usarlo en cualquier rutina.</div>
-<div id="bibliotecaRapida" class="grid"></div>
-<div id="formEjercicio" class="card" style="display:none;margin:15px 0"><h3>Nuevo ejercicio</h3><form onsubmit="guardarEjercicio(event)">
-<input id="nombreEjercicio" placeholder="Nombre del ejercicio" required><select id="categoriaEjercicioNueva" required></select>
-<div class="row"><input id="seriesEjercicio" placeholder="Series (ej. 4)"><input id="repsEjercicio" placeholder="Repeticiones (ej. 10-12)"><input id="descansoEjercicio" placeholder="Descanso (ej. 90 s)"></div>
-<textarea id="indicacionesEjercicio" placeholder="Indicaciones / técnica"></textarea>
+<div class="section-title"><h2>Biblioteca de ejercicios</h2><button class="primary" id="btnNuevoEjercicio">+ Nuevo ejercicio</button></div>
+<div class="quick"><input id="buscarEjercicio" placeholder="Buscar ejercicio..."><select id="filtroCategoria"></select></div>
+<div id="formEjercicio" class="card hidden">
+<h3 id="tituloFormEjercicio">Nuevo ejercicio</h3>
+<form id="ejercicioForm">
+<input type="hidden" id="ejercicioId">
+<div class="row"><input id="nombreEjercicio" placeholder="Nombre del ejercicio" required><select id="categoriaEjercicio"></select></div>
+<div class="row"><input id="seriesEjercicio" placeholder="Series"><input id="repsEjercicio" placeholder="Repeticiones"><input id="descansoEjercicio" placeholder="Descanso"></div>
+<textarea id="indicacionesEjercicio" placeholder="Indicaciones"></textarea>
 <label>Imagen del ejercicio (opcional)<input id="imagenEjercicio" type="file" accept="image/*"></label>
-<div class="row"><button class="primary">Guardar</button><button type="button" onclick="ocultarFormEjercicio()">Cancelar</button></div>
-</form></div><h3>Mis ejercicios</h3><div id="listaEjercicios"></div>
+<div id="vistaImagen" class="small"></div>
+<div class="actions"><button class="primary">Guardar ejercicio</button><button type="button" id="cancelarEjercicio">Cancelar</button></div>
+</form>
+</div>
+<div id="listaEjercicios" class="grid"></div>
+</section>
+
+<section id="rutinas" class="view">
+<div class="section-title"><h2>Rutinas</h2><button class="primary" id="btnNuevaRutina">+ Nueva rutina</button></div>
+<div id="formRutina" class="card hidden">
+<h3 id="tituloFormRutina">Nueva rutina</h3>
+<form id="rutinaForm">
+<input type="hidden" id="rutinaId">
+<div class="row"><input id="nombreRutina" placeholder="Nombre de la rutina" required><select id="alumnoRutina" required></select></div>
+<div class="row"><select id="tipoRutina"><option value="diaria">Rutina diaria</option><option value="semanal">Rutina semanal</option></select><select id="diaRutina"><option>Lunes</option><option>Martes</option><option>Miércoles</option><option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option></select></div>
+<textarea id="notasRutina" placeholder="Indicaciones generales"></textarea>
+<div><b>Elegí los ejercicios:</b><div id="ejerciciosSeleccionados" class="day-box"></div></div>
+<div class="actions"><button class="primary">Guardar rutina</button><button type="button" id="cancelarRutina">Cancelar</button></div>
+</form>
+</div>
+<div id="listaRutinas"></div>
 </section>
 
 <section id="perfil" class="view">
-<div class="card">
-<h2>Datos del profesor / gimnasio</h2>
-<p class="muted">Estos datos aparecerán en las rutinas que compartas.</p>
-<form onsubmit="guardarPerfil(event)">
-<input id="nombreProfesor" placeholder="Nombre del profesor / entrenador">
-<input id="nombreGimnasio" placeholder="Nombre del gimnasio">
+<h2>Profesor / Gimnasio</h2>
+<div class="card"><form id="perfilForm">
+<input id="nombreProfesor" placeholder="Nombre del profesor / entrenador" required>
+<input id="nombreGimnasio" placeholder="Nombre del gimnasio" required>
 <input id="telefonoProfesor" placeholder="WhatsApp del profesor (opcional)">
-<div class="row"><button class="primary">Guardar datos</button></div>
-</form>
-</div>
+<button class="primary">Guardar datos</button>
+</form></div>
 </section>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-const KEY='entrenadoresPF_v1',PROFILE_KEY='entrenadoresPF_perfil_v1';
-const CATEGORIAS=['Pecho','Espalda','Piernas','Hombros','Bíceps','Tríceps','Abdomen','Glúteos','Cardio','Otros'];
-const PRESETS=[['Press banca','Pecho','4','10','90 s','Controlar la bajada y mantener los pies apoyados.'],['Press inclinado con mancuernas','Pecho','4','10-12','90 s','Controlar el recorrido.'],['Aperturas con mancuernas','Pecho','3','12','60 s','Movimiento controlado.'],['Jalón al pecho','Espalda','4','10-12','90 s','Llevar la barra al pecho sin balancearse.'],['Remo sentado','Espalda','4','10-12','90 s','Mantener espalda neutra.'],['Remo con mancuerna','Espalda','3','10-12','75 s','Controlar la fase excéntrica.'],['Sentadilla','Piernas','4','8-10','120 s','Rodillas alineadas y espalda firme.'],['Prensa 45°','Piernas','4','10-12','120 s','No despegar la cadera del respaldo.'],['Extensión de cuádriceps','Piernas','3','12-15','60 s','Pausa breve arriba.'],['Curl femoral','Piernas','3','12-15','60 s','Controlar todo el recorrido.'],['Elevación de talones','Piernas','4','15-20','60 s','Recorrido completo.'],['Press militar','Hombros','4','8-10','90 s','No arquear excesivamente la espalda.'],['Elevaciones laterales','Hombros','3','12-15','60 s','Subir hasta línea de hombros.'],['Curl de bíceps con mancuernas','Bíceps','3','10-12','60 s','Sin balancear el cuerpo.'],['Curl martillo','Bíceps','3','10-12','60 s','Mantener codos cerca del cuerpo.'],['Extensión de tríceps en polea','Tríceps','3','10-12','60 s','Codos quietos.'],['Press francés','Tríceps','3','10-12','75 s','Controlar la bajada.'],['Crunch abdominal','Abdomen','3','15-20','45 s','No tirar del cuello.'],['Plancha','Abdomen','3','30-45 s','45 s','Mantener cuerpo alineado.'],['Puente de glúteos','Glúteos','4','12-15','60 s','Apretar glúteos arriba.'],['Hip thrust','Glúteos','4','8-12','120 s','Extender la cadera sin hiperextender la espalda.'],['Caminata en cinta','Cardio','1','15-30 min','-','Ritmo moderado.'],['Bicicleta fija','Cardio','1','15-30 min','-','Ritmo moderado.']];
-let data=JSON.parse(localStorage.getItem(KEY)||'{"alumnos":[],"rutinas":[],"ejercicios":[]}');
-let perfil=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"profesor":"","gimnasio":"","telefono":""}');
-function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
-function savePerfil(){localStorage.setItem(PROFILE_KEY,JSON.stringify(perfil));actualizarPerfil()}
-function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function llenarCategorias(){[['categoriaEjercicio',false],['categoriaRutinaEjercicio',false],['categoriaEjercicioNueva',true]].forEach(([id,req])=>{let s=document.getElementById(id);if(!s)return;let v=s.value;s.innerHTML=(req?'<option value="">Categoría...</option>':'<option value="">Todas las categorías</option>')+CATEGORIAS.map(c=>`<option value="${c}">${c}</option>`).join('');s.value=v})}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.view).classList.add('active');renderAll()});
-function mostrarFormAlumno(){formAlumno.style.display='block'}function ocultarFormAlumno(){formAlumno.style.display='none'}
-function guardarAlumno(e){e.preventDefault();data.alumnos.push({id:id(),nombre:nombreAlumno.value,telefono:telefonoAlumno.value,objetivo:objetivoAlumno.value});e.target.reset();ocultarFormAlumno();save()}
-function borrarAlumno(x){if(confirm('¿Eliminar este alumno?')){data.alumnos=data.alumnos.filter(a=>a.id!==x);data.rutinas=data.rutinas.filter(r=>r.alumnoId!==x);save()}}
-function renderAlumnos(){let el=listaAlumnos;if(!data.alumnos.length){el.innerHTML='<div class="card empty">Todavía no cargaste alumnos.</div>';return}el.innerHTML='<div class="card"><table><tr><th>Alumno</th><th>Teléfono</th><th>Objetivo</th><th></th></tr>'+data.alumnos.map(a=>`<tr><td><b>${esc(a.nombre)}</b></td><td>${esc(a.telefono)}</td><td>${esc(a.objetivo)}</td><td><button class="danger small" onclick="borrarAlumno('${a.id}')">Eliminar</button></td></tr>`).join('')+'</table></div>'}
-function mostrarFormEjercicio(){formEjercicio.style.display='block'}function ocultarFormEjercicio(){formEjercicio.style.display='none'}
-function guardarEjercicio(e){e.preventDefault();data.ejercicios.push({id:id(),nombre:nombreEjercicio.value,categoria:categoriaEjercicioNueva.value,series:seriesEjercicio.value,reps:repsEjercicio.value,descanso:descansoEjercicio.value,indicaciones:indicacionesEjercicio.value});e.target.reset();ocultarFormEjercicio();save()}
-function borrarEjercicio(x){if(confirm('¿Eliminar este ejercicio?')){data.ejercicios=data.ejercicios.filter(a=>a.id!==x);save()}}
-function agregarPreset(i){let p=PRESETS[i];if(data.ejercicios.some(e=>e.nombre.toLowerCase()===p[0].toLowerCase())){alert('Ese ejercicio ya está en tu biblioteca.');return}data.ejercicios.push({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5]});save()}
-function renderBibliotecaRapida(){let q=(buscarEjercicio?.value||'').toLowerCase().trim(),cat=categoriaEjercicio?.value||'',lista=PRESETS.map((p,i)=>({p,i})).filter(x=>(!q||x.p[0].toLowerCase().includes(q))&&(!cat||x.p[1]===cat));bibliotecaRapida.innerHTML=lista.length?lista.map(x=>`<div class="card"><span class="badge">${esc(x.p[1])}</span><div class="quick"><div><h3>${esc(x.p[0])}</h3><div class="info">${esc(x.p[2])} series · ${esc(x.p[3])} reps · ${esc(x.p[4])}</div></div><button class="primary small" onclick="agregarPreset(${x.i})">+ Agregar</button></div></div>`).join(''):'<div class="card empty">No hay ejercicios que coincidan.</div>'}
-function renderEjercicios(){llenarCategorias();renderBibliotecaRapida();let q=(buscarEjercicio?.value||'').toLowerCase().trim(),cat=categoriaEjercicio?.value||'',lista=data.ejercicios.filter(a=>(!q||a.nombre.toLowerCase().includes(q))&&(!cat||a.categoria===cat));listaEjercicios.innerHTML=lista.length?'<div class="grid">'+lista.map(a=>`<div class="card"><span class="badge">${esc(a.categoria||'Otros')}</span><h3>${esc(a.nombre)}</h3><div class="muted">${esc(a.series||'-')} series · ${esc(a.reps||'-')} reps · ${esc(a.descanso||'-')} descanso</div><p>${esc(a.indicaciones||'Sin indicaciones')}</p><button class="danger small" onclick="borrarEjercicio('${a.id}')">Eliminar</button></div>`).join('')+'</div>':'<div class="card empty">Todavía no tenés ejercicios propios que coincidan con el filtro.</div>'}
-function mostrarFormRutina(){formRutina.style.display='block';alumnoRutina.innerHTML='<option value="">Seleccionar alumno...</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join('');llenarCategorias();renderSelectorEjercicios()}
-function ocultarFormRutina(){formRutina.style.display='none'}
-function renderSelectorEjercicios(){let q=(buscarRutinaEjercicio?.value||'').toLowerCase().trim(),cat=categoriaRutinaEjercicio?.value||'',lista=data.ejercicios.filter(x=>(!q||x.nombre.toLowerCase().includes(q))&&(!cat||x.categoria===cat));if(!data.ejercicios.length){ejerciciosSeleccionados.innerHTML='<div class="notice">Primero agregá ejercicios desde la biblioteca de Ejercicios.</div>';return}ejerciciosSeleccionados.innerHTML=lista.length?lista.map(x=>`<label class="exercise"><input type="checkbox" value="${x.id}"> <b>${esc(x.nombre)}</b><br><span class="muted">${esc(x.categoria||'Otros')} · ${esc(x.series||'-')} series · ${esc(x.reps||'-')} reps · ${esc(x.descanso||'-')}</span></label>`).join(''):'<div class="empty">No hay ejercicios que coincidan.</div>'}
-function guardarRutina(e){e.preventDefault();let ids=[...document.querySelectorAll('#ejerciciosSeleccionados input:checked')].map(x=>x.value);if(!alumnoRutina.value){alert('Seleccioná un alumno.');return}if(!ids.length){alert('Seleccioná al menos un ejercicio.');return}data.rutinas.push({id:id(),nombre:nombreRutina.value,alumnoId:alumnoRutina.value,notas:notasRutina.value,ejercicios:ids});e.target.reset();ocultarFormRutina();save()}
-function borrarRutina(x){if(confirm('¿Eliminar esta rutina?')){data.rutinas=data.rutinas.filter(r=>r.id!==x);save()}}
-function textoRutina(r){let a=data.alumnos.find(a=>a.id===r.alumnoId),ex=r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean);let t=`${perfil.gimnasio?perfil.gimnasio+' · ':''}Rutina de ${a?.nombre||''}\n${r.nombre}\n\n`;if(perfil.profesor)t+=`Entrenador: ${perfil.profesor}\n`;ex.forEach((e,i)=>t+=`${i+1}. ${e.nombre} — ${e.series||'-'} series x ${e.reps||'-'} · Descanso: ${e.descanso||'-'}\n`);if(r.notas)t+=`\nIndicaciones: ${r.notas}\n`;return t}
-function compartirRutina(x){let r=data.rutinas.find(a=>a.id===x);if(!r)return;let text=textoRutina(r);if(navigator.share){navigator.share({title:r.nombre,text}).catch(()=>{})}else{window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank')}}
-function imprimirRutina(x){
-  let r=data.rutinas.find(a=>a.id===x);
-  if(!r)return;
-  let a=data.alumnos.find(a=>a.id===r.alumnoId);
-  let ex=r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean);
-  let w=window.open('','_blank');
-  if(!w){alert('Permití ventanas emergentes para continuar.');return;}
-  w.document.write(`<html><head><title>${esc(r.nombre)}</title>
-  <style>body{font-family:Arial;padding:30px}table{width:100%;border-collapse:collapse}
-  th,td{padding:10px;border:1px solid #ccc;text-align:left}</style></head><body>
-  <h1>${esc(perfil.gimnasio||'Entrenadores PF')}</h1>
-  ${perfil.profesor?`<p><b>Entrenador:</b> ${esc(perfil.profesor)}</p>`:''}
-  <h2>${esc(r.nombre)}</h2><p><b>Alumno:</b> ${esc(a?.nombre||'')}</p>
-  <p>${esc(r.notas||'')}</p>
-  <table><tr><th>Ejercicio</th><th>Series</th><th>Repeticiones</th><th>Descanso</th><th>Indicaciones</th></tr>
-  ${ex.map(e=>`<tr><td>${esc(e.nombre)}</td><td>${esc(e.series)}</td><td>${esc(e.reps)}</td><td>${esc(e.descanso)}</td><td>${esc(e.indicaciones)}</td></tr>`).join('')}
-  </table></body></html>`);
-  w.document.close();
-  setTimeout(()=>w.print(),300);
-}
-</script>
-<script>window.print()<\/script>
-<script>
-/* ===== Actualización v4 ===== */
-const PF_EXTRA=[
-['Press con mancuernas','Pecho','4','8-12','90 s','Recorrido controlado.'],
-['Press en máquina','Pecho','3','10-12','75 s','Mantener hombros estables.'],
-['Flexiones','Pecho','3','10-20','60 s','Cuerpo alineado.'],
-['Peck deck','Pecho','3','12-15','60 s','Cerrar sin impulso.'],
-['Remo T','Espalda','4','8-12','90 s','Espalda firme.'],
-['Remo unilateral en polea','Espalda','3','10-12','75 s','Evitar rotar el torso.'],
-['Jalón agarre cerrado','Espalda','3','10-12','75 s','Llevar codos hacia abajo.'],
-['Pulldown brazos rectos','Espalda','3','12-15','60 s','Controlar la subida.'],
-['Peso muerto convencional','Espalda','3','5-8','150 s','Técnica estricta.'],
-['Buenos días','Espalda','3','10-12','90 s','Usar carga moderada.'],
-['Sentadilla búlgara','Piernas','3','8-12 por pierna','90 s','Controlar la estabilidad.'],
-['Step up','Piernas','3','10-12 por pierna','75 s','Impulsar con la pierna de arriba.'],
-['Prensa unilateral','Piernas','3','10-12 por pierna','90 s','Controlar el recorrido.'],
-['Peso muerto sumo','Piernas','4','6-10','120 s','Rodillas acompañan la punta de los pies.'],
-['Buenos días en máquina','Piernas','3','10-15','75 s','Movimiento controlado.'],
-['Abducción en máquina','Glúteos','3','15-20','60 s','Pausa al abrir.'],
-['Adducción en máquina','Piernas','3','12-15','60 s','Controlar ambos sentidos.'],
-['Patada de glúteo en máquina','Glúteos','3','12-15','60 s','No arquear la espalda.'],
-['Elevación frontal','Hombros','3','10-15','60 s','Sin impulso.'],
-['Remo al mentón','Hombros','3','10-12','75 s','No elevar excesivamente los codos.'],
-['Reverse fly en máquina','Hombros','3','12-15','60 s','Controlar la fase negativa.'],
-['Curl concentrado','Bíceps','3','10-12','60 s','Apoyar el brazo.'],
-['Curl en polea baja','Bíceps','3','10-15','60 s','Tensión constante.'],
-['Curl spider','Bíceps','3','10-12','60 s','Evitar despegar el pecho.'],
-['Extensión de tríceps unilateral','Tríceps','3','12-15','60 s','Codo fijo.'],
-['Tríceps cuerda','Tríceps','3','10-15','60 s','Separar la cuerda abajo.'],
-['Press cerrado','Tríceps','3','8-12','90 s','Codos controlados.'],
-['Crunch en polea','Abdomen','3','12-15','45 s','Flexionar el tronco.'],
-['Ab wheel','Abdomen','3','8-12','60 s','No hundir la zona lumbar.'],
-['Pallof press','Abdomen','3','10-15 por lado','45 s','Resistir la rotación.'],
-['Bicicleta abdominal','Abdomen','3','15-20 por lado','45 s','Movimiento lento.'],
-['Hip thrust unilateral','Glúteos','3','10-12 por pierna','75 s','Controlar pelvis.'],
-['Peso muerto rumano unilateral','Glúteos','3','10-12 por pierna','75 s','Mantener equilibrio.'],
-['Caminata lateral con banda','Glúteos','3','15-20 pasos','45 s','Mantener tensión.'],
-['Escaladora','Cardio','1','10-20 min','-','Ritmo progresivo.'],
-['Air bike','Cardio','1','10-20 min','-','Ritmo moderado.'],
-['Sprints en cinta','Cardio','6','20-30 s','60-90 s','Realizar solo con adaptación previa.'],
-['Farmer walk','Antebrazos','3','30-60 s','60 s','Postura erguida.'],
-['Encogimientos con barra','Trapecio','4','10-15','75 s','Sin hacer círculos con los hombros.'],
-['Plancha lateral','Abdomen','3','30-45 s por lado','45 s','Cuerpo alineado.']
+(function(){
+"use strict";
+const KEY="entrenadoresPF_v8", PROFILE_KEY="entrenadoresPF_perfil_v8";
+const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
+const presets=[
+["Press banca","Pecho","4","10","90 s","Controlar la bajada."],["Press inclinado con mancuernas","Pecho","4","8-12","90 s","Recorrido controlado."],
+["Aperturas con mancuernas","Pecho","3","12","60 s","No cerrar bruscamente."],["Jalón al pecho","Espalda","4","10-12","90 s","Llevar hacia el pecho."],
+["Remo con barra","Espalda","4","8-10","120 s","Espalda estable."],["Remo sentado","Espalda","3","10-12","90 s","Controlar el regreso."],
+["Sentadilla","Piernas","4","8-10","120 s","Rodillas alineadas."],["Prensa 45°","Piernas","4","10-12","120 s","No bloquear rodillas."],
+["Peso muerto rumano","Piernas","3","8-10","120 s","Mantener espalda neutra."],["Extensión de cuádriceps","Piernas","3","12-15","60 s","Movimiento controlado."],
+["Curl femoral","Piernas","3","12-15","60 s","Controlar la fase negativa."],["Press militar","Hombros","4","8-10","90 s","No arquear la espalda."],
+["Elevaciones laterales","Hombros","3","12-15","60 s","Subir con control."],["Curl de bíceps","Bíceps","3","10-12","60 s","Sin balanceo."],
+["Curl martillo","Bíceps","3","10-12","60 s","Muñecas neutras."],["Tríceps en polea","Tríceps","3","10-15","60 s","Codos quietos."],
+["Extensión de tríceps","Tríceps","3","10-12","60 s","Controlar el movimiento."],["Crunch","Abdomen","3","15-20","45 s","No tirar del cuello."],
+["Plancha","Abdomen","3","30-60 s","45 s","Mantener línea corporal."],["Hip thrust","Glúteos","4","8-12","90 s","Extender cadera."],
+["Abducción en máquina","Glúteos","3","12-20","60 s","Movimiento controlado."],["Caminata","Cardio","1","20-30 min","-","Ritmo moderado."],
+["Bicicleta","Cardio","1","20-30 min","-","Ritmo moderado."]
 ];
-PF_EXTRA.forEach(p=>{if(!PRESETS.some(x=>x[0].toLowerCase()===p[0].toLowerCase()))PRESETS.push(p)});
+let data=JSON.parse(localStorage.getItem(KEY)||'{"alumnos":[],"ejercicios":[],"rutinas":[]}');
+let perfil=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"profesor":"","gimnasio":"","telefono":""}');
+if(!data.ejercicios.length)data.ejercicios=presets.map(p=>({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""}));
+const $=id=>document.getElementById(id), save=()=>localStorage.setItem(KEY,JSON.stringify(data)), savePerfil=()=>localStorage.setItem(PROFILE_KEY,JSON.stringify(perfil));
+const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
+function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length}
+function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?esc(a.telefono):""}</p><div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
+function updateAlumnoSelect(){$("alumnoRutina").innerHTML='<option value="">Seleccionar alumno</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join("")}
+$("btnNuevoAlumno").onclick=()=>{resetAlumno();$("formAlumno").classList.remove("hidden")};
+$("cancelarAlumno").onclick=()=>$("formAlumno").classList.add("hidden");
+function resetAlumno(){$("alumnoForm").reset();$("alumnoId").value="";$("tituloFormAlumno").textContent="Nuevo alumno"}
+window.editarAlumno=function(x){const a=data.alumnos.find(a=>a.id===x);if(!a)return;$("alumnoId").value=a.id;$("nombreAlumno").value=a.nombre;$("telefonoAlumno").value=a.telefono||"";$("edadAlumno").value=a.edad||"";$("objetivoAlumno").value=a.objetivo||"";$("tituloFormAlumno").textContent="Editar alumno";$("formAlumno").classList.remove("hidden");nav("alumnos")};
+window.borrarAlumno=function(x){if(confirm("¿Eliminar este alumno?")){data.alumnos=data.alumnos.filter(a=>a.id!==x);data.rutinas=data.rutinas.filter(r=>r.alumnoId!==x);save();renderAlumnos();renderRutinas();updateCounts()}};
+$("alumnoForm").onsubmit=e=>{e.preventDefault();const x=$("alumnoId").value;const a={id:x||id(),nombre:$("nombreAlumno").value.trim(),telefono:$("telefonoAlumno").value.trim(),edad:$("edadAlumno").value,objetivo:$("objetivoAlumno").value.trim()};if(x){const i=data.alumnos.findIndex(z=>z.id===x);data.alumnos[i]=a}else data.alumnos.push(a);save();resetAlumno();$("formAlumno").classList.add("hidden");renderAlumnos();updateCounts()};
 
-function pfLeerImagen(file){
-  return new Promise(resolve=>{
-    if(!file){resolve('');return}
-    const r=new FileReader();
-    r.onload=()=>resolve(r.result);
-    r.readAsDataURL(file);
-  });
-}
+function fillCats(){const opts=CATS.map(c=>`<option>${c}</option>`).join("");$("categoriaEjercicio").innerHTML=opts;$("filtroCategoria").innerHTML='<option value="">Todas las zonas</option>'+opts}
+function renderEjercicios(){const q=$("buscarEjercicio").value.toLowerCase().trim(),cat=$("filtroCategoria").value;const list=data.ejercicios.filter(e=>(!q||e.nombre.toLowerCase().includes(q))&&(!cat||e.categoria===cat));$("listaEjercicios").innerHTML=list.length?list.map(e=>`<div class="card">${e.imagen?`<img class="exercise-img" src="${e.imagen}" alt="">`:""}<h3>${esc(e.nombre)}</h3><div class="muted">${esc(e.categoria)} · ${esc(e.series||"-")} series · ${esc(e.reps||"-")} reps · ${esc(e.descanso||"-")}</div><p>${esc(e.indicaciones||"")}</p><div class="actions"><button onclick="editarEjercicio('${e.id}')">Editar</button><button class="danger" onclick="borrarEjercicio('${e.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">No hay ejercicios que coincidan.</div>';updateCounts()}
+$("buscarEjercicio").oninput=renderEjercicios;$("filtroCategoria").onchange=renderEjercicios;
+$("btnNuevoEjercicio").onclick=()=>{resetEjercicio();$("formEjercicio").classList.remove("hidden")};$("cancelarEjercicio").onclick=()=>$("formEjercicio").classList.add("hidden");
+function resetEjercicio(){$("ejercicioForm").reset();$("ejercicioId").value="";$("vistaImagen").innerHTML="";$("tituloFormEjercicio").textContent="Nuevo ejercicio"}
+window.editarEjercicio=function(x){const e=data.ejercicios.find(e=>e.id===x);if(!e)return;$("ejercicioId").value=e.id;$("nombreEjercicio").value=e.nombre;$("categoriaEjercicio").value=e.categoria;$("seriesEjercicio").value=e.series||"";$("repsEjercicio").value=e.reps||"";$("descansoEjercicio").value=e.descanso||"";$("indicacionesEjercicio").value=e.indicaciones||"";$("vistaImagen").innerHTML=e.imagen?`<img class="exercise-thumb" src="${e.imagen}"> Imagen guardada`:"";$("tituloFormEjercicio").textContent="Editar ejercicio";$("formEjercicio").classList.remove("hidden");nav("ejercicios")};
+window.borrarEjercicio=function(x){if(confirm("¿Eliminar este ejercicio?")){data.ejercicios=data.ejercicios.filter(e=>e.id!==x);data.rutinas.forEach(r=>r.ejercicios=r.ejercicios.filter(i=>i!==x));save();renderEjercicios();renderRutinas()}};
+$("ejercicioForm").onsubmit=async e=>{e.preventDefault();const x=$("ejercicioId").value;const old=data.ejercicios.find(z=>z.id===x);let imagen=old?.imagen||"";const file=$("imagenEjercicio").files[0];if(file)imagen=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const obj={id:x||id(),nombre:$("nombreEjercicio").value.trim(),categoria:$("categoriaEjercicio").value,series:$("seriesEjercicio").value,reps:$("repsEjercicio").value,descanso:$("descansoEjercicio").value,indicaciones:$("indicacionesEjercicio").value.trim(),imagen};if(x){data.ejercicios[data.ejercicios.findIndex(z=>z.id===x)]=obj}else data.ejercicios.push(obj);save();resetEjercicio();$("formEjercicio").classList.add("hidden");renderEjercicios();renderRutinas()};
 
-function pfActualizarTipo(){
-  const semanal=document.getElementById('tipoRutina')?.value==='semanal';
-  const box=document.getElementById('semanaCampos');
-  if(box)box.style.display=semanal?'block':'none';
-}
-
-function pfMostrarAlumno(idAlumno=null){
-  editAlumnoId=idAlumno;
-  formAlumno.style.display='block';
-  const a=idAlumno?data.alumnos.find(x=>x.id===idAlumno):null;
-  document.querySelector('#formAlumno h3').textContent=a?'Editar alumno':'Nuevo alumno';
-  document.querySelector('#formAlumno button.primary').textContent=a?'Actualizar alumno':'Guardar';
-  if(a){nombreAlumno.value=a.nombre;telefonoAlumno.value=a.telefono||'';objetivoAlumno.value=a.objetivo||''}
-  else document.querySelector('#formAlumno form').reset();
-}
-function pfGuardarAlumno(e){
-  e.preventDefault();
-  if(editAlumnoId){
-    const a=data.alumnos.find(x=>x.id===editAlumnoId);
-    a.nombre=nombreAlumno.value.trim();a.telefono=telefonoAlumno.value.trim();a.objetivo=objetivoAlumno.value.trim();
-  }else data.alumnos.push({id:id(),nombre:nombreAlumno.value.trim(),telefono:telefonoAlumno.value.trim(),objetivo:objetivoAlumno.value.trim()});
-  cancelarAlumno();save();
-}
-function pfRenderAlumnos(){
-  if(!data.alumnos.length){listaAlumnos.innerHTML='<div class="card empty">Todavía no cargaste alumnos.</div>';return}
-  listaAlumnos.innerHTML='<div class="grid">'+data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${esc(a.telefono||'Sin teléfono')} · ${esc(a.objetivo||'Sin objetivo')}</div><div class="actions" style="margin-top:12px"><button class="primary small" onclick="pfMostrarAlumno('${a.id}')">✏️ Editar</button><button class="danger small" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join('')+'</div>';
-}
-
-async function pfGuardarEjercicio(e){
-  e.preventDefault();
-  const img=await pfLeerImagen(document.getElementById('imagenEjercicio')?.files?.[0]);
-  if(editEjercicioId){
-    const a=data.ejercicios.find(x=>x.id===editEjercicioId);
-    a.nombre=nombreEjercicio.value.trim();a.categoria=categoriaEjercicioNueva.value;a.series=seriesEjercicio.value.trim();a.reps=repsEjercicio.value.trim();a.descanso=descansoEjercicio.value.trim();a.indicaciones=indicacionesEjercicio.value.trim();
-    if(img)a.imagen=img;
-  }else{
-    data.ejercicios.push({id:id(),nombre:nombreEjercicio.value.trim(),categoria:categoriaEjercicioNueva.value,series:seriesEjercicio.value.trim(),reps:repsEjercicio.value.trim(),descanso:descansoEjercicio.value.trim(),indicaciones:indicacionesEjercicio.value.trim(),imagen:img});
-  }
-  cancelarEjercicio();save();
-}
-function pfMostrarEjercicio(idEj=null){
-  editEjercicioId=idEj;formEjercicio.style.display='block';
-  const a=idEj?data.ejercicios.find(x=>x.id===idEj):null;
-  document.querySelector('#formEjercicio h3').textContent=a?'Editar ejercicio':'Nuevo ejercicio';
-  if(a){nombreEjercicio.value=a.nombre;categoriaEjercicioNueva.value=a.categoria;seriesEjercicio.value=a.series||'';repsEjercicio.value=a.reps||'';descansoEjercicio.value=a.descanso||'';indicacionesEjercicio.value=a.indicaciones||''}
-  else document.querySelector('#formEjercicio form').reset();
-}
-
-function pfMostrarRutina(idRut=null){
-  editRutinaId=idRut;formRutina.style.display='block';
-  alumnoRutina.innerHTML='<option value="">Seleccionar alumno...</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join('');
-  llenarCategorias();
-  document.querySelector('#formRutina h3').textContent=idRut?'Editar rutina':'Nueva rutina';
-  document.querySelector('#formRutina button.primary').textContent=idRut?'Actualizar rutina':'Guardar rutina';
-  if(idRut){
-    const r=data.rutinas.find(x=>x.id===idRut);
-    nombreRutina.value=r.nombre;alumnoRutina.value=r.alumnoId;notasRutina.value=r.notas||'';
-    document.getElementById('tipoRutina').value=r.tipo||'diaria';document.getElementById('fechaRutina').value=r.fecha||'';
-    document.querySelectorAll('.diaSemana').forEach(c=>c.checked=(r.dias||[]).includes(c.value));
-  }else{
-    document.querySelector('#formRutina form').reset();
-    document.getElementById('tipoRutina').value='diaria';
-    document.querySelectorAll('.diaSemana').forEach(c=>c.checked=false);
-  }
-  pfActualizarTipo();renderSelectorEjercicios();
-}
-function pfGuardarRutina(e){
-  e.preventDefault();
-  const ids=[...document.querySelectorAll('#ejerciciosSeleccionados input:checked')].map(x=>x.value);
-  if(!alumnoRutina.value){alert('Seleccioná un alumno.');return}
-  if(!ids.length){alert('Seleccioná al menos un ejercicio.');return}
-  const tipo=document.getElementById('tipoRutina').value;
-  const dias=[...document.querySelectorAll('.diaSemana:checked')].map(x=>x.value);
-  if(tipo==='semanal'&&!dias.length){alert('Seleccioná al menos un día de la semana.');return}
-  const obj={nombre:nombreRutina.value.trim(),alumnoId:alumnoRutina.value,tipo,fecha:document.getElementById('fechaRutina').value,dias,notas:notasRutina.value.trim(),ejercicios:ids};
-  if(editRutinaId)Object.assign(data.rutinas.find(x=>x.id===editRutinaId),obj);
-  else data.rutinas.push({id:id(),...obj});
-  cancelarRutina();save();
-}
-function pfCompartirWhatsApp(idRut){
-  const r=data.rutinas.find(x=>x.id===idRut); if(!r)return;
-  const a=data.alumnos.find(x=>x.id===r.alumnoId);
-  let t=`*${perfil.gimnasio||'ENTRENADORES PF'}*\\n`;
-  if(perfil.profesor)t+=`Profesor: *${perfil.profesor}*\\n`;
-  t+=`\\n🏋️ *${r.nombre}*\\n👤 Alumno: ${a?.nombre||''}\\n`;
-  t+=`📅 ${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}`;
-  if(r.dias?.length)t+=`\\nDías: ${r.dias.join(', ')}`;
-  t+='\\n\\n';
-  r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean).forEach((e,i)=>{
-    t+=`*${i+1}. ${e.nombre}*\\n${e.series||'-'} series × ${e.reps||'-'} · Descanso: ${e.descanso||'-'}\\n`;
-    if(e.indicaciones)t+=`${e.indicaciones}\\n`;
-    t+='\\n';
-  });
-  if(r.notas)t+=`📝 *Indicaciones generales:* ${r.notas}\\n`;
-  window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
-}
-function pfRenderRutinas(){
-  if(!data.rutinas.length){listaRutinas.innerHTML='<div class="card empty">Todavía no cargaste rutinas.</div>';return}
-  listaRutinas.innerHTML='<div class="grid">'+data.rutinas.map(r=>{
-    const a=data.alumnos.find(x=>x.id===r.alumnoId);
-    return `<div class="card"><span class="badge">${r.tipo==='semanal'?'SEMANAL':'DIARIA'}</span><h3>${esc(r.nombre)}</h3><div class="muted">Alumno: ${esc(a?.nombre||'Sin asignar')}</div>${r.dias?.length?`<p class="info">Días: ${esc(r.dias.join(', '))}</p>`:''}<p>${esc(r.notas||'')}</p><p><b>${r.ejercicios.length}</b> ejercicios</p><div class="actions"><button class="primary" onclick="pfCompartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="pfMostrarRutina('${r.id}')">✏️ Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`
-  }).join('')}</div>';
-}
-
-/* Reemplazamos los handlers y renderizadores de esta versión. */
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.view).classList.add('active');renderAll()});
-const pfBtnAlumno=document.querySelector('#alumnos .section-title button'); if(pfBtnAlumno)pfBtnAlumno.onclick=()=>pfMostrarAlumno();
-const pfBtnEj=document.querySelector('#ejercicios .section-title button'); if(pfBtnEj)pfBtnEj.onclick=()=>pfMostrarEjercicio();
-const pfBtnRut=document.querySelector('#rutinas .section-title button'); if(pfBtnRut)pfBtnRut.onclick=()=>pfMostrarRutina();
-const pfFormAlumno=document.querySelector('#formAlumno form'); if(pfFormAlumno)pfFormAlumno.onsubmit=pfGuardarAlumno;
-const pfFormEj=document.querySelector('#formEjercicio form'); if(pfFormEj)pfFormEj.onsubmit=pfGuardarEjercicio;
-const pfFormRut=document.querySelector('#formRutina form'); if(pfFormRut)pfFormRut.onsubmit=pfGuardarRutina;
-document.getElementById('tipoRutina')?.addEventListener('change',pfActualizarTipo);
-
-function renderAll(){
-  countAlumnos.textContent=data.alumnos.length;countRutinas.textContent=data.rutinas.length;countEjercicios.textContent=data.ejercicios.length;
-  pfRenderAlumnos();renderEjercicios();pfRenderRutinas();
-}
-renderAll();
-</script>
-
-
-<script>
-async function descargarPDF(idRut){
-  const r=data.rutinas.find(x=>x.id===idRut); if(!r)return;
-  if(typeof html2pdf==='undefined'){alert('No se pudo cargar el generador de PDF. Revisá la conexión y volvé a intentar.');return;}
-  const a=data.alumnos.find(x=>x.id===r.alumnoId);
-  const ex=r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean);
-  const box=document.createElement('div');
-  box.style.cssText='position:absolute;left:-100000px;top:0;width:794px;background:#fff;color:#17202a;padding:38px;font-family:Arial,sans-serif';
-  box.innerHTML=`
-    <div style="border-bottom:2px solid #17202a;padding-bottom:12px">
-      <div style="font-size:25px;font-weight:bold">${esc(perfil.gimnasio||'Entrenadores PF')}</div>
-      ${perfil.profesor?`<div>Entrenador: ${esc(perfil.profesor)}</div>`:''}
-    </div>
-    <div style="font-size:21px;font-weight:bold;margin-top:16px">${esc(r.nombre)}</div>
-    <div style="background:#f3f4f6;border-radius:10px;padding:12px;margin:14px 0">
-      <b>Alumno:</b> ${esc(a?.nombre||'')}<br>
-      <b>Tipo:</b> ${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}
-      ${r.dias?.length?`<br><b>Días:</b> ${esc(r.dias.join(', '))}`:''}
-      ${r.notas?`<br><b>Indicaciones:</b> ${esc(r.notas)}`:''}
-    </div>
-    ${ex.map((e,i)=>`<div style="border:1px solid #ddd;border-radius:10px;padding:12px;margin:10px 0;display:flex;gap:12px;page-break-inside:avoid">
-      ${e.imagen?`<img src="${e.imagen}" style="width:105px;height:85px;object-fit:cover;border-radius:7px">`:''}
-      <div><div style="font-size:18px;font-weight:bold">${i+1}. ${esc(e.nombre)}</div>
-      <div style="font-weight:bold;margin-top:5px">${esc(e.series||'-')} series × ${esc(e.reps||'-')} · Descanso: ${esc(e.descanso||'-')}</div>
-      <div style="font-size:12px;margin-top:6px">${esc(e.indicaciones||'')}</div></div>
-    </div>`).join('')}`;
-  document.body.appendChild(box);
-  const nombre=(r.nombre||'rutina').replace(/[^\wáéíóúñÁÉÍÓÚÑ -]/g,'').replace(/\s+/g,'_');
-  try{
-    await html2pdf().set({margin:8,filename:nombre+'.pdf',image:{type:'jpeg',quality:.92},html2canvas:{scale:1.5,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(box).save();
-  }catch(e){alert('No se pudo generar el PDF. Volvé a intentar.');}
-  finally{box.remove();}
-}
-</script>
-
-</body></html>`);w.document.close()}
-function renderRutinas(){if(!data.rutinas.length){listaRutinas.innerHTML='<div class="card empty">Todavía no cargaste rutinas.</div>';return}listaRutinas.innerHTML='<div class="grid">'+data.rutinas.map(r=>{let a=data.alumnos.find(x=>x.id===r.alumnoId);return `<div class="card"><h3>${esc(r.nombre)}</h3><div class="muted">Alumno: ${esc(a?.nombre||'Sin asignar')}</div><p>${esc(r.notas||'')}</p><p><b>${r.ejercicios.length}</b> ejercicios</p><div class="actions"><button class="primary" onclick="compartirRutina('${r.id}')">📲 Compartir</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`}).join('')}</div>'}
-function cargarPerfil(){nombreProfesor.value=perfil.profesor||'';nombreGimnasio.value=perfil.gimnasio||'';telefonoProfesor.value=perfil.telefono||'';actualizarPerfil()}
-function guardarPerfil(e){e.preventDefault();perfil={profesor:nombreProfesor.value.trim(),gimnasio:nombreGimnasio.value.trim(),telefono:telefonoProfesor.value.trim()};savePerfil();alert('Datos guardados.')}
-function actualizarPerfil(){let partes=[];if(perfil.profesor)partes.push(perfil.profesor);if(perfil.gimnasio)partes.push(perfil.gimnasio);encabezadoPerfil.textContent=partes.length?partes.join(' · '):'Gestión simple y rápida de rutinas para tus alumnos'}
-function renderAll(){countAlumnos.textContent=data.alumnos.length;countRutinas.textContent=data.rutinas.length;countEjercicios.textContent=data.ejercicios.length;renderAlumnos();renderEjercicios();renderRutinas()}
-llenarCategorias();cargarPerfil();renderAll();
+function renderEjerciciosRutina(){const q="";$("ejerciciosSeleccionados").innerHTML=data.ejercicios.map(e=>`<label style="display:block;margin:7px 0"><input type="checkbox" value="${e.id}"> ${e.imagen?`<img class="exercise-thumb" src="${e.imagen}">`:""}<b>${esc(e.nombre)}</b> <span class="muted">(${esc(e.categoria)})</span></label>`).join("")||'<div class="notice">Primero agregá ejercicios.</div>'}
+$("btnNuevaRutina").onclick=()=>{resetRutina();renderEjerciciosRutina();$("formRutina").classList.remove("hidden")};$("cancelarRutina").onclick=()=>$("formRutina").classList.add("hidden");
+function resetRutina(){$("rutinaForm").reset();$("rutinaId").value="";$("tituloFormRutina").textContent="Nueva rutina";$("tipoRutina").value="diaria"}
+function renderRutinas(){const box=$("listaRutinas");if(!data.rutinas.length){box.innerHTML='<div class="notice">Todavía no cargaste rutinas.</div>';return}box.innerHTML=data.rutinas.map(r=>{const a=data.alumnos.find(x=>x.id===r.alumnoId);return `<div class="card" style="margin:12px 0"><div class="section-title"><h3>${esc(r.nombre)}</h3><span class="muted">${esc(r.tipo)}${r.tipo==="semanal"&&r.dia?" · "+esc(r.dia):""}</span></div><p>Alumno: <b>${esc(a?.nombre||"Sin asignar")}</b></p><p>${esc(r.notas||"")}</p><p><b>${r.ejercicios.length}</b> ejercicios</p><div class="actions"><button class="primary" onclick="compartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="editarRutina('${r.id}')">Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`}).join("")}
+$("rutinaForm").onsubmit=e=>{e.preventDefault();const x=$("rutinaId").value;const ids=[...$("ejerciciosSeleccionados").querySelectorAll("input:checked")].map(i=>i.value);if(!$("alumnoRutina").value)return alert("Seleccioná un alumno.");if(!ids.length)return alert("Seleccioná al menos un ejercicio.");const r={id:x||id(),nombre:$("nombreRutina").value.trim(),alumnoId:$("alumnoRutina").value,tipo:$("tipoRutina").value,dia:$("tipoRutina").value==="semanal"?$("diaRutina").value:"",notas:$("notasRutina").value.trim(),ejercicios:ids};if(x)data.rutinas[data.rutinas.findIndex(z=>z.id===x)]=r;else data.rutinas.push(r);save();$("formRutina").classList.add("hidden");renderRutinas();updateCounts()};
+window.editarRutina=function(x){const r=data.rutinas.find(r=>r.id===x);if(!r)return;$("rutinaId").value=r.id;$("nombreRutina").value=r.nombre;$("alumnoRutina").value=r.alumnoId;$("tipoRutina").value=r.tipo;$("diaRutina").value=r.dia||"Lunes";$("notasRutina").value=r.notas||"";renderEjerciciosRutina();setTimeout(()=>r.ejercicios.forEach(i=>{const c=$(`input[value="${i}"]`);if(c)c.checked=true}),0);$("tituloFormRutina").textContent="Editar rutina";$("formRutina").classList.remove("hidden");nav("rutinas")};
+window.borrarRutina=function(x){if(confirm("¿Eliminar esta rutina?")){data.rutinas=data.rutinas.filter(r=>r.id!==x);save();renderRutinas();updateCounts()}};
+function textoRutina(r){const a=data.alumnos.find(x=>x.id===r.alumnoId);let t=`${perfil.gimnasio||"Entrenadores PF"}\n`;if(perfil.profesor)t+=`Entrenador: ${perfil.profesor}\n`;t+=`Alumno: ${a?.nombre||"Sin asignar"}\nRutina: ${r.nombre}\nTipo: ${r.tipo}${r.dia?" - "+r.dia:""}\n\n`;r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean).forEach((e,n)=>t+=`${n+1}. ${e.nombre} — ${e.series||"-"} series x ${e.reps||"-"} · Descanso ${e.descanso||"-"}\n`);if(r.notas)t+=`\nIndicaciones: ${r.notas}`;return t}
+window.compartirWhatsApp=function(x){const r=data.rutinas.find(r=>r.id===x);if(!r)return;const text=textoRutina(r);const phone=perfil.telefono.replace(/\D/g,"");const url=phone?`https://wa.me/${phone}?text=${encodeURIComponent(text)}`:`https://wa.me/?text=${encodeURIComponent(text)}`;window.open(url,"_blank")};
+window.descargarPDF=async function(x){const r=data.rutinas.find(r=>r.id===x);if(!r)return;const a=data.alumnos.find(a=>a.id===r.alumnoId);const ex=r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean);const wrap=document.createElement("div");wrap.style.cssText="position:fixed;left:-10000px;top:0;width:760px;background:#fff;padding:28px;color:#111;font-family:Arial";wrap.innerHTML=`<h1>${esc(perfil.gimnasio||"Entrenadores PF")}</h1>${perfil.profesor?`<p><b>Entrenador:</b> ${esc(perfil.profesor)}</p>`:""}<h2>${esc(r.nombre)}</h2><p><b>Alumno:</b> ${esc(a?.nombre||"")}</p><p><b>Tipo:</b> ${esc(r.tipo)}${r.dia?" · "+esc(r.dia):""}</p>${r.notas?`<p>${esc(r.notas)}</p>`:""}<table style="width:100%;border-collapse:collapse"><tr><th style="border:1px solid #ccc;padding:8px">Ejercicio</th><th style="border:1px solid #ccc;padding:8px">Series</th><th style="border:1px solid #ccc;padding:8px">Reps</th><th style="border:1px solid #ccc;padding:8px">Descanso</th></tr>${ex.map(e=>`<tr><td style="border:1px solid #ccc;padding:8px">${esc(e.nombre)}</td><td style="border:1px solid #ccc;padding:8px">${esc(e.series)}</td><td style="border:1px solid #ccc;padding:8px">${esc(e.reps)}</td><td style="border:1px solid #ccc;padding:8px">${esc(e.descanso)}</td></tr>`).join("")}</table>`;document.body.appendChild(wrap);if(typeof html2pdf==="undefined"){alert("No se pudo cargar el generador de PDF. Revisá tu conexión a internet.");wrap.remove();return}await html2pdf().set({margin:8,filename:(r.nombre||"rutina")+".pdf",image:{type:"jpeg",quality:.95},html2canvas:{scale:2},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}}).from(wrap).save();wrap.remove()};
+$("perfilForm").onsubmit=e=>{e.preventDefault();perfil={profesor:$("nombreProfesor").value.trim(),gimnasio:$("nombreGimnasio").value.trim(),telefono:$("telefonoProfesor").value.trim()};savePerfil();actualizarPerfil();alert("Datos guardados.")};
+function cargarPerfil(){$("nombreProfesor").value=perfil.profesor||"";$("nombreGimnasio").value=perfil.gimnasio||"";$("telefonoProfesor").value=perfil.telefono||"";actualizarPerfil()}
+function actualizarPerfil(){const p=[perfil.profesor,perfil.gimnasio].filter(Boolean);$("encabezadoPerfil").textContent=p.length?p.join(" · "):"Gestión simple y rápida de rutinas para tus alumnos"}
+fillCats();cargarPerfil();renderAlumnos();renderEjercicios();renderRutinas();updateCounts();
+})();
 </script>
 </body>
 </html>
