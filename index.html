@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores PF</title>
+<title>Entrenadores PF — v10 corregida</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -111,6 +111,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 (function(){
 "use strict";
 const KEY="entrenadoresPF_v8", PROFILE_KEY="entrenadoresPF_perfil_v8";
+const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
 const presets=[
 ["Press banca","Pecho","4","10","90 s","Controlar la bajada."],["Press inclinado con mancuernas","Pecho","4","8-12","90 s","Recorrido controlado."],
@@ -130,7 +131,6 @@ let data=JSON.parse(localStorage.getItem(KEY)||'{"alumnos":[],"ejercicios":[],"r
 let perfil=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"profesor":"","gimnasio":"","telefono":""}');
 if(!data.ejercicios.length)data.ejercicios=presets.map(p=>({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""}));
 const $=id=>document.getElementById(id), save=()=>localStorage.setItem(KEY,JSON.stringify(data)), savePerfil=()=>localStorage.setItem(PROFILE_KEY,JSON.stringify(perfil));
-const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
