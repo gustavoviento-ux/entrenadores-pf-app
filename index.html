@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores P.F. — v11.6</title>
+<title>Entrenadores P.F. — v11.9</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -27,7 +27,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </style>
 </head>
 <body>
-<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v11.6</div></div></header>
+<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v11.9</div></div></header>
 <main>
 <nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
@@ -106,7 +106,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </section>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -244,36 +244,66 @@ window.editarRutina=function(x){const r=data.rutinas.find(r=>r.id===x);if(!r)ret
 window.borrarRutina=function(x){if(confirm("¿Eliminar esta rutina?")){data.rutinas=data.rutinas.filter(r=>r.id!==x);save();renderRutinas();updateCounts()}};
 function textoRutina(r){const a=data.alumnos.find(x=>x.id===r.alumnoId);const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);let t=`${perfil.gimnasio||'Entrenadores P.F.'}\n`;if(perfil.profesor)t+=`Entrenador: ${perfil.profesor}\n`;t+=`Alumno: ${a?.nombre||'Sin asignar'}\nRutina: ${r.nombre}\nDías: ${dias.join(', ')}\n\n`;dias.forEach(d=>{t+=`📅 ${d}\n`;normalizarRefs(ejerciciosDelDia(r,d)).map(ref=>({ref,e:data.ejercicios.find(e=>e.id===ref.id)})).filter(x=>x.e).forEach((x,n)=>t+=`${n+1}. ${x.e.nombre} — ${x.e.series||'-'} series x ${x.e.reps||'-'} · Peso ${x.ref.peso||'-'} · Descanso ${x.e.descanso||'-'}\n`);t+='\n'});if(r.notas)t+=`Indicaciones: ${r.notas}`;return t}
 async function construirPDFBlob(x){
- const r=data.rutinas.find(r=>r.id===x);if(!r)throw new Error('Rutina no encontrada');
- const a=data.alumnos.find(a=>a.id===r.alumnoId);if(typeof html2pdf==='undefined')throw new Error('No se pudo cargar el generador de PDF. Revisá tu conexión a internet.');
+ const r=data.rutinas.find(r=>r.id===x); if(!r) throw new Error('Rutina no encontrada');
+ if(!window.jspdf || !window.jspdf.jsPDF) throw new Error('No se pudo cargar el generador PDF. Revisá tu conexión a internet.');
+ const a=data.alumnos.find(a=>a.id===r.alumnoId);
  const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);
- const wrap=document.createElement('div');
- wrap.style.cssText='position:absolute;left:0;top:0;width:760px;background:#fff;padding:30px;color:#111;font-family:Arial,sans-serif;z-index:99999;box-sizing:border-box';
- const logoSvg=`<svg viewBox="0 0 64 64" style="width:28px;height:28px"><rect x="7" y="28" width="50" height="8" rx="4" fill="#222"/><rect x="11" y="17" width="9" height="30" rx="3" fill="#222"/><rect x="44" y="17" width="9" height="30" rx="3" fill="#222"/><rect x="4" y="22" width="7" height="20" rx="3" fill="#222"/><rect x="53" y="22" width="7" height="20" rx="3" fill="#222"/></svg>`;
- let html=`<div style="border-bottom:3px solid #222;padding-bottom:12px"><div style="display:flex;align-items:center;gap:10px"><div>${logoSvg}</div><div><div style="font-size:24px;font-weight:800">Entrenadores P.F.</div><div style="font-size:12px;color:#666">Rutinas · Progreso · Rendimiento</div></div></div>${perfil.profesor?`<p style="margin:8px 0 0"><b>Entrenador:</b> ${esc(perfil.profesor)}</p>`:''}</div><h2 style="margin-bottom:8px">${esc(r.nombre)}</h2><div style="background:#f3f4f6;padding:12px;border-radius:8px;margin-bottom:18px"><b>Alumno:</b> ${esc(a?.nombre||'')}<br><b>Días:</b> ${esc(dias.join(', '))}${a?.objetivo?`<br><b>Objetivo:</b> ${esc(a.objetivo)}`:''}${r.notas?`<br><b>Indicaciones:</b> ${esc(r.notas)}`:''}</div>`;
- dias.forEach(d=>{const refs=normalizarRefs(ejerciciosDelDia(r,d));html+=`<section style="margin-bottom:20px"><h2 style="background:#222;color:#fff;padding:10px;border-radius:6px">${esc(d)}</h2><table style="width:100%;border-collapse:collapse"><thead><tr><th style="border:1px solid #ccc;padding:8px;text-align:left">#</th><th style="border:1px solid #ccc;padding:8px;text-align:left">Ejercicio</th><th style="border:1px solid #ccc;padding:8px">Grupo</th><th style="border:1px solid #ccc;padding:8px">Series</th><th style="border:1px solid #ccc;padding:8px">Reps</th><th style="border:1px solid #ccc;padding:8px">Peso</th><th style="border:1px solid #ccc;padding:8px">Descanso</th></tr></thead><tbody>${refs.map((ref,i)=>{const e=data.ejercicios.find(e=>e.id===ref.id);return e?`<tr><td style="border:1px solid #ccc;padding:8px">${i+1}</td><td style="border:1px solid #ccc;padding:8px"><b>${esc(e.nombre)}</b></td><td style="border:1px solid #ccc;padding:8px">${esc(e.categoria)}</td><td style="border:1px solid #ccc;padding:8px;text-align:center">${esc(e.series||'-')}</td><td style="border:1px solid #ccc;padding:8px;text-align:center">${esc(e.reps||'-')}</td><td style="border:1px solid #ccc;padding:8px;text-align:center">${esc(ref.peso||'-')}</td><td style="border:1px solid #ccc;padding:8px;text-align:center">${esc(e.descanso||'-')}</td></tr>`:''}).join('')}</tbody></table></section>`});
- wrap.innerHTML=html;document.body.appendChild(wrap);
- try{
-   await new Promise(res=>requestAnimationFrame(()=>requestAnimationFrame(res)));
-   const worker=html2pdf().set({margin:8,filename:(r.nombre||'rutina')+'.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#fff',logging:false,scrollX:0,scrollY:0},pagebreak:{mode:['css','legacy'],avoid:['tr']},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(wrap);
-   const blob=await worker.outputPdf('blob');
-   return {blob,filename:(r.nombre||'rutina')+'.pdf'};
- }finally{wrap.remove()}
+ const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+ const W=210, M=10, CW=W-M*2;
+ let y=14;
+ const safe=v=>String(v??'').replace(/\s+/g,' ').trim();
+ const text=(v,x,yy,size=9,bold=false)=>{doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);doc.text(safe(v),x,yy);};
+ const line=()=>{doc.setDrawColor(210);doc.line(M,y,W-M,y);};
+ // Logo / header
+ doc.setFillColor(34,34,34);doc.roundedRect(M,y,12,12,2,2,'F');
+ doc.setFillColor(255,255,255);doc.rect(M+3,y+5,6,2,'F');doc.rect(M+4,y+2,2,8,'F');doc.rect(M+8,y+2,2,8,'F');
+ text('Entrenadores P.F.',M+16,y+6,18,true); text('Rutinas · Progreso · Rendimiento',M+16,y+11,8,false);
+ y+=18; doc.setDrawColor(34,34,34);doc.setLineWidth(.8);doc.line(M,y,W-M,y);y+=7;
+ text(r.nombre||'Rutina de entrenamiento',M,y,14,true); y+=6;
+ text('Alumno:',M,y,9,true); text(a?.nombre||'Sin asignar',M+18,y,9,false);
+ if(perfil.profesor){text('Entrenador:',110,y,9,true);text(perfil.profesor,132,y,9,false)} y+=5;
+ if(a?.objetivo){text('Objetivo:',M,y,9,true);text(a.objetivo,M+18,y,9,false);y+=5}
+ if(r.notas){text('Indicaciones:',M,y,9,true);text(r.notas,M+27,y,9,false);y+=6}
+ const widths=[8,57,28,18,25,25,29];
+ const headers=['#','Ejercicio','Grupo','Series','Reps','Peso','Descanso'];
+ function header(){
+   let x=M;doc.setFillColor(34,34,34);doc.rect(M,y,CW,8,'F');doc.setTextColor(255,255,255);
+   headers.forEach((h,i)=>{text(h,x+2,y+5,7,true);x+=widths[i]});
+   doc.setTextColor(17,17,17);y+=8;
+ }
+ function row(vals){
+   const h=9; let x=M; doc.setDrawColor(205);doc.setFillColor(249,249,249);doc.rect(M,y,CW,h,'F');
+   vals.forEach((v,i)=>{doc.rect(x,y,widths[i],h); const str=safe(v); const max=Math.max(8,Math.floor(widths[i]/2.1)); text(str.length>max?str.slice(0,max-1)+'…':str,x+2,y+5.8,6.8,false);x+=widths[i]}); y+=h;
+ }
+ for(const d of dias){
+   if(y>250){doc.addPage();y=15}
+   doc.setFillColor(48,35,107);doc.roundedRect(M,y,CW,9,1.5,1.5,'F');doc.setTextColor(255,255,255);text(d,M+3,y+6,10,true);doc.setTextColor(17,17,17);y+=11;
+   header();
+   const refs=normalizarRefs(ejerciciosDelDia(r,d));
+   if(!refs.length){row(['','','Sin ejercicios','','','',''])}
+   refs.forEach((ref,i)=>{
+     const e=data.ejercicios.find(e=>e.id===ref.id); if(!e)return;
+     if(y>275){doc.addPage();y=15;header()}
+     row([i+1,e.nombre,e.categoria||'',e.series||'-',e.reps||'-',ref.peso||'-',e.descanso||'-']);
+   });
+   y+=7;
+ }
+ doc.setFontSize(7);doc.setTextColor(110,110,110);doc.text('Generado con Entrenadores P.F.',M,289);
+ return {blob:doc.output('blob'),filename:(r.nombre||'rutina')+'.pdf'};
 }
 window.descargarPDF=async function(x){
- try{const out=await construirPDFBlob(x);const url=URL.createObjectURL(out.blob);const a=document.createElement('a');a.href=url;a.download=out.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}catch(err){console.error(err);alert('No se pudo generar el PDF. Probá nuevamente.')}
+ try{const out=await construirPDFBlob(x);const url=URL.createObjectURL(out.blob);const a=document.createElement('a');a.href=url;a.download=out.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}catch(err){console.error(err);alert('No se pudo generar el PDF: '+(err.message||err))}
 };
 window.compartirWhatsApp=async function(x){
  try{
    const out=await construirPDFBlob(x);
    const file=new File([out.blob],out.filename,{type:'application/pdf'});
-   if(navigator.canShare && navigator.canShare({files:[file]})){
-     await navigator.share({title:out.filename,text:'Rutina de entrenamiento',files:[file]});
-     return;
-   }
+   if(navigator.canShare && navigator.canShare({files:[file]})){await navigator.share({title:out.filename,text:'Rutina de entrenamiento',files:[file]});return;}
    const url=URL.createObjectURL(out.blob);const a=document.createElement('a');a.href=url;a.download=out.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
-   alert('Tu navegador no permite adjuntar el PDF directamente a WhatsApp. El PDF fue descargado; desde WhatsApp podés adjuntarlo como documento.');
- }catch(err){if(err?.name==='AbortError')return;console.error(err);alert('No se pudo preparar el PDF para compartir.')}
+   const telefono=(data.alumnos.find(a=>a.id===data.rutinas.find(r=>r.id===x)?.alumnoId)?.telefono||'').replace(/\D/g,'');
+   window.open('https://wa.me/'+(telefono||''),'_blank');
+   alert('El PDF fue descargado. En WhatsApp adjuntalo como Documento.');
+ }catch(err){if(err?.name==='AbortError')return;console.error(err);alert('No se pudo preparar el PDF: '+(err.message||err))}
 };
 $("perfilForm").onsubmit=e=>{e.preventDefault();perfil={profesor:$("nombreProfesor").value.trim(),gimnasio:$("nombreGimnasio").value.trim(),telefono:$("telefonoProfesor").value.trim()};savePerfil();actualizarPerfil();alert("Datos guardados.")};
 function cargarPerfil(){$("nombreProfesor").value=perfil.profesor||"";$("nombreGimnasio").value=perfil.gimnasio||"";$("telefonoProfesor").value=perfil.telefono||"";actualizarPerfil()}
