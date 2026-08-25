@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores PF — v10 corregida</title>
+<title>Entrenadores PF — v11</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -27,7 +27,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </style>
 </head>
 <body>
-<header><div class="header"><div class="logo">Entrenadores PF</div><div class="subtitle" id="encabezadoPerfil">Gestión simple y rápida de rutinas para tus alumnos</div></div></header>
+<header><div class="header"><div class="logo">Entrenadores PF <span style="font-size:12px;opacity:.7">v11</span></div><div class="subtitle" id="encabezadoPerfil">Gestión simple y rápida de rutinas para tus alumnos</div></div></header>
 <main>
 <nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
@@ -166,7 +166,7 @@ function renderEjerciciosRutina(preselected){
     const groups={};
     data.ejercicios.forEach(e=>(groups[e.categoria]??=[]).push(e));
     const html=Object.entries(groups).map(([cat,items])=>`<div><div class="muted small"><b>${esc(cat)}</b></div>${items.map(e=>`<label><input type="checkbox" data-day="${esc(d)}" value="${e.id}" ${selected.includes(e.id)?'checked':''}> ${esc(e.nombre)}</label>`).join('')}</div>`).join('');
-    return `<div class="routine-day"><h4>📅 ${esc(d)}</h4><div class="small muted">Elegí los ejercicios de este día. Podés usar hasta 6 + abdominales.</div><div class="exercise-list">${html}</div></div>`;
+    return `<div class="routine-day"><h4>📅 ${esc(d)}</h4><div class="small muted">Elegí hasta 6 ejercicios principales + los abdominales que necesites. Los ejercicios de Abdomen no cuentan para el límite de 6.</div><div class="exercise-list">${html}</div></div>`;
   }).join('');
 }
 function diasChange(){renderEjerciciosRutina()}
@@ -180,7 +180,7 @@ $("rutinaForm").onsubmit=e=>{
  if(!$("alumnoRutina").value)return alert('Seleccioná un alumno.');
  if(!dias.length)return alert('Seleccioná al menos un día de la semana.');
  const diaEjercicios={};let total=0;
- dias.forEach(d=>{diaEjercicios[d]=[...document.querySelectorAll(`#ejerciciosSeleccionados input[data-day="${CSS.escape(d)}"]:checked`)].map(i=>i.value);total+=diaEjercicios[d].length});
+ for(const d of dias){diaEjercicios[d]=[...document.querySelectorAll(`#ejerciciosSeleccionados input[data-day="${CSS.escape(d)}"]:checked`)].map(i=>i.value);const principales=diaEjercicios[d].map(i=>data.ejercicios.find(e=>e.id===i)).filter(e=>e&&e.categoria!=='Abdomen');if(principales.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales. Los de Abdomen no cuentan.`);total+=diaEjercicios[d].length}
  if(!total)return alert('Seleccioná al menos un ejercicio en alguno de los días.');
  const first=diaEjercicios[dias[0]]||[];
  const r={id:x||id(),nombre:$("nombreRutina").value.trim(),alumnoId:$("alumnoRutina").value,tipo:$("tipoRutina").value,dias,dia:dias[0],diaEjercicios,ejercicios:first,notas:$("notasRutina").value.trim()};
