@@ -281,7 +281,7 @@ function pfGuardarRutina(e){
   cancelarRutina();save();
 }
 function pfCompartirWhatsApp(idRut){
-  const r=data.rutinas.find(x=>x.id===idRut);if(!r)return;
+  const r=data.rutinas.find(x=>x.id===idRut); if(!r)return;
   const a=data.alumnos.find(x=>x.id===r.alumnoId);
   let t=`*${perfil.gimnasio||'ENTRENADORES PF'}*\\n`;
   if(perfil.profesor)t+=`Profesor: *${perfil.profesor}*\\n`;
@@ -324,41 +324,37 @@ renderAll();
 
 
 <script>
-function descargarPDF(idRut){
+async function descargarPDF(idRut){
   const r=data.rutinas.find(x=>x.id===idRut); if(!r)return;
+  if(typeof html2pdf==='undefined'){alert('No se pudo cargar el generador de PDF. Revisá la conexión y volvé a intentar.');return;}
   const a=data.alumnos.find(x=>x.id===r.alumnoId);
   const ex=r.ejercicios.map(i=>data.ejercicios.find(e=>e.id===i)).filter(Boolean);
-  const w=window.open('','_blank');
-  if(!w){alert('Permití ventanas emergentes para descargar el PDF.');return;}
-  const ejercicios=ex.map((e,i)=>`
-    <div class="ej">
-      ${e.imagen?`<img src="${e.imagen}" class="foto">`:''}
-      <div class="num">${i+1}.</div>
-      <div><h3>${esc(e.nombre)}</h3>
-      <b>${esc(e.series||'-')} series × ${esc(e.reps||'-')} · Descanso: ${esc(e.descanso||'-')}</b>
-      <p>${esc(e.indicaciones||'')}</p></div>
-    </div>`).join('');
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8">
-  <title>${esc(r.nombre)}</title>
-  <style>
-  @page{size:A4;margin:14mm}body{font-family:Arial;color:#17202a}
-  .head{border-bottom:2px solid #17202a;padding-bottom:12px}
-  .meta{background:#f3f4f6;padding:12px;border-radius:10px;margin:15px 0}
-  .ej{border:1px solid #ddd;border-radius:10px;padding:10px;margin:10px 0;page-break-inside:avoid;display:flex;gap:10px}
-  .foto{width:105px;height:85px;object-fit:cover;border-radius:7px;order:2;margin-left:auto}
-  .num{font-size:18px;font-weight:bold}.ej h3{margin:0 0 5px}.ej p{font-size:12px}
-  </style></head><body>
-  <div class="head"><h1>${esc(perfil.gimnasio||'Entrenadores PF')}</h1>
-  ${perfil.profesor?`<div>Entrenador: ${esc(perfil.profesor)}</div>`:''}</div>
-  <h2>${esc(r.nombre)}</h2>
-  <div class="meta"><b>Alumno:</b> ${esc(a?.nombre||'')}<br>
-  <b>Tipo:</b> ${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}
-  ${r.dias?.length?`<br><b>Días:</b> ${esc(r.dias.join(', '))}`:''}
-  ${r.notas?`<br><b>Indicaciones:</b> ${esc(r.notas)}`:''}</div>
-  ${ejercicios}
-  <script>window.addEventListener('load',()=>setTimeout(()=>window.print(),300));<\/script>
-  </body></html>`);
-  w.document.close();
+  const box=document.createElement('div');
+  box.style.cssText='position:absolute;left:-100000px;top:0;width:794px;background:#fff;color:#17202a;padding:38px;font-family:Arial,sans-serif';
+  box.innerHTML=`
+    <div style="border-bottom:2px solid #17202a;padding-bottom:12px">
+      <div style="font-size:25px;font-weight:bold">${esc(perfil.gimnasio||'Entrenadores PF')}</div>
+      ${perfil.profesor?`<div>Entrenador: ${esc(perfil.profesor)}</div>`:''}
+    </div>
+    <div style="font-size:21px;font-weight:bold;margin-top:16px">${esc(r.nombre)}</div>
+    <div style="background:#f3f4f6;border-radius:10px;padding:12px;margin:14px 0">
+      <b>Alumno:</b> ${esc(a?.nombre||'')}<br>
+      <b>Tipo:</b> ${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}
+      ${r.dias?.length?`<br><b>Días:</b> ${esc(r.dias.join(', '))}`:''}
+      ${r.notas?`<br><b>Indicaciones:</b> ${esc(r.notas)}`:''}
+    </div>
+    ${ex.map((e,i)=>`<div style="border:1px solid #ddd;border-radius:10px;padding:12px;margin:10px 0;display:flex;gap:12px;page-break-inside:avoid">
+      ${e.imagen?`<img src="${e.imagen}" style="width:105px;height:85px;object-fit:cover;border-radius:7px">`:''}
+      <div><div style="font-size:18px;font-weight:bold">${i+1}. ${esc(e.nombre)}</div>
+      <div style="font-weight:bold;margin-top:5px">${esc(e.series||'-')} series × ${esc(e.reps||'-')} · Descanso: ${esc(e.descanso||'-')}</div>
+      <div style="font-size:12px;margin-top:6px">${esc(e.indicaciones||'')}</div></div>
+    </div>`).join('')}`;
+  document.body.appendChild(box);
+  const nombre=(r.nombre||'rutina').replace(/[^\wáéíóúñÁÉÍÓÚÑ -]/g,'').replace(/\s+/g,'_');
+  try{
+    await html2pdf().set({margin:8,filename:nombre+'.pdf',image:{type:'jpeg',quality:.92},html2canvas:{scale:1.5,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(box).save();
+  }catch(e){alert('No se pudo generar el PDF. Volvé a intentar.');}
+  finally{box.remove();}
 }
 </script>
 
