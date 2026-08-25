@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores PF — v11</title>
+<title>Entrenadores PF — v11.3</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -27,7 +27,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </style>
 </head>
 <body>
-<header><div class="header"><div class="logo">Entrenadores PF <span style="font-size:12px;opacity:.7">v11</span></div><div class="subtitle" id="encabezadoPerfil">Gestión simple y rápida de rutinas para tus alumnos</div></div></header>
+<header><div class="header"><div class="logo">Entrenadores PF <span style="font-size:12px;opacity:.7">v11</span></div><div class="subtitle" id="encabezadoPerfil">Gestión simple y rápida de rutinas para tus alumnos · v11.5</div></div></header>
 <main>
 <nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
@@ -62,7 +62,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </section>
 
 <section id="ejercicios" class="view">
-<div class="section-title"><h2>Biblioteca de ejercicios</h2><button class="primary" id="btnNuevoEjercicio">+ Nuevo ejercicio</button></div>
+<div class="section-title"><h2>Biblioteca de ejercicios <span id="bibliotecaTotal" class="muted"></span></h2><button class="primary" id="btnNuevoEjercicio">+ Nuevo ejercicio</button></div>
 <div class="quick"><input id="buscarEjercicio" placeholder="Buscar ejercicio..."><select id="filtroCategoria"></select></div>
 <div id="formEjercicio" class="card hidden">
 <h3 id="tituloFormEjercicio">Nuevo ejercicio</h3>
@@ -111,7 +111,9 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 (function(){
 "use strict";
 window.addEventListener("error",function(ev){console.error("Entrenadores PF:",ev.error||ev.message)});
-const KEY="entrenadoresPF_v8", PROFILE_KEY="entrenadoresPF_perfil_v8";
+const KEY="entrenadoresPF_v11_5", PROFILE_KEY="entrenadoresPF_perfil_v11_5";
+const OLD_KEY="entrenadoresPF_v11_4", OLD_PROFILE_KEY="entrenadoresPF_perfil_v11_4";
+const LEGACY_KEY="entrenadoresPF_v11_3", LEGACY_PROFILE_KEY="entrenadoresPF_perfil_v11_3";
 const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
 const presets=[
@@ -124,20 +126,55 @@ const presets=[
 ["Tríceps en polea","Tríceps","3","10-15","60 s","Codos quietos."],["Extensión de tríceps","Tríceps","3","10-12","60 s","Controlar el movimiento."],["Press francés","Tríceps","3","8-12","75 s","No abrir excesivamente los codos."],["Extensión sobre la cabeza","Tríceps","3","10-15","60 s","Mantener codos estables."],["Fondos para tríceps","Tríceps","3","8-12","90 s","Controlar la bajada."],["Patada de tríceps","Tríceps","3","12-15","60 s","Sin balanceo."],["Tríceps en polea con cuerda","Tríceps","3","10-15","60 s","Separar la cuerda abajo."],["Press cerrado","Tríceps","4","8-12","90 s","Codos cerca del cuerpo."],
 ["Hip thrust","Glúteos","4","8-12","90 s","Extender cadera."],["Abducción en máquina","Glúteos","3","12-20","60 s","Movimiento controlado."],["Patada de glúteo en polea","Glúteos","3","12-15","60 s","No arquear la espalda."],["Puente de glúteos","Glúteos","3","12-15","60 s","Apretar arriba."],["Sentadilla sumo","Glúteos","4","8-12","120 s","Rodillas acompañan la punta del pie."],["Peso muerto sumo","Glúteos","4","6-10","120 s","Mantener columna neutra."],["Zancada larga","Glúteos","3","10-12","90 s","Paso amplio y estable."],["Abducción en polea","Glúteos","3","12-15","60 s","Controlar el retorno."],["Step up alto","Glúteos","3","8-12","90 s","Empujar con el talón."],["Extensión de cadera en máquina","Glúteos","3","10-15","60 s","Sin hiperextender la espalda."],
 ["Crunch","Abdomen","3","15-20","45 s","No tirar del cuello."],["Plancha","Abdomen","3","30-60 s","45 s","Mantener línea corporal."],["Elevaciones de piernas","Abdomen","3","10-15","45 s","Controlar la bajada."],["Crunch en polea","Abdomen","3","12-15","45 s","Flexionar el tronco."],["Abdominal bicicleta","Abdomen","3","15-20","45 s","Movimiento controlado."],["Plancha lateral","Abdomen","3","30-45 s","45 s","Cadera alineada."],["Dead bug","Abdomen","3","10-12","45 s","Mantener zona lumbar estable."],["Pallof press","Abdomen","3","10-15","45 s","Evitar rotación."],["Mountain climbers","Abdomen","3","20-30","45 s","Ritmo controlado."],["Rueda abdominal","Abdomen","3","6-12","60 s","No arquear la espalda."],
-["Caminata","Cardio","1","20-30 min","-","Ritmo moderado."],["Bicicleta","Cardio","1","20-30 min","-","Ritmo moderado."],["Elíptico","Cardio","1","20-30 min","-","Ritmo moderado."],["Remo ergómetro","Cardio","1","15-25 min","-","Ritmo sostenido."],["Cinta inclinada","Cardio","1","15-25 min","-","Mantener ritmo cómodo."]
-];
-let data=JSON.parse(localStorage.getItem(KEY)||'{"alumnos":[],"ejercicios":[],"rutinas":[]}');
-let perfil=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"profesor":"","gimnasio":"","telefono":""}');
-// Completa automáticamente la biblioteca en instalaciones anteriores sin borrar ejercicios personalizados.
-const presetNames=new Set(data.ejercicios.map(e=>e.nombre));
-for(const p of presets){if(!presetNames.has(p[0]))data.ejercicios.push({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""})}
+["Caminata","Cardio","1","20-30 min","-","Ritmo moderado."],["Bicicleta","Cardio","1","20-30 min","-","Ritmo moderado."],["Elíptico","Cardio","1","20-30 min","-","Ritmo moderado."],["Remo ergómetro","Cardio","1","15-25 min","-","Ritmo sostenido."],["Cinta inclinada","Cardio","1","15-25 min","-","Mantener ritmo cómodo."],
+["Press convergente en máquina","Pecho","3","8-12","90 s","Controlar el recorrido y mantener escápulas estables."],
+["Remo con pecho apoyado","Espalda","3","8-12","90 s","Evitar impulso y llevar los codos hacia atrás."],
+["Hack unilateral","Cuádriceps","3","10-12","90 s","Mantener la rodilla alineada con el pie."],
+["Curl 90 grados","Bíceps","3","10-12","60 s","Mantener los codos estables."],
+["Extensión de tríceps unilateral en polea","Tríceps","3","10-15","60 s","Controlar especialmente la vuelta." ]
+,
+["Press en máquina inclinado","Pecho","3","10-12","90 s","Controlar la bajada."],
+["Aperturas en polea baja","Pecho","3","12-15","60 s","Mantener tensión continua."],
+["Remo en máquina","Espalda","3","10-12","90 s","No balancear el torso."],
+["Jalón unilateral","Espalda","3","10-12","75 s","Llevar el codo hacia la cadera."],
+["Sentadilla en máquina","Cuádriceps","3","10-12","90 s","Controlar profundidad y rodillas."],
+["Prensa horizontal","Cuádriceps","3","10-15","90 s","No bloquear las rodillas."],
+["Curl femoral con fitball","Isquiosurales","3","12-15","60 s","Mantener cadera estable."],
+["Peso muerto rumano unilateral","Isquiosurales","3","8-12","90 s","Equilibrio y espalda neutra."],
+["Elevación lateral con mancuernas sentado","Hombros","3","12-15","60 s","Evitar impulso."],
+["Press de hombros en máquina","Hombros","3","8-12","90 s","Controlar el recorrido."],
+["Curl spider","Bíceps","3","10-12","60 s","Mantener tensión constante."],
+["Curl en máquina","Bíceps","3","10-15","60 s","Movimiento estricto."],
+["Extensión de tríceps en máquina","Tríceps","3","10-15","60 s","Controlar la vuelta."],
+["Tríceps unilateral en polea","Tríceps","3","10-15","60 s","Mantener el codo fijo."],
+["Hip thrust unilateral","Glúteos","3","10-12","75 s","Extender la cadera sin arquear."],
+["Patada de glúteo en máquina","Glúteos","3","12-15","60 s","Controlar el retorno."],
+["Crunch inverso","Abdomen","3","12-20","45 s","Elevar la pelvis con control."],
+["Hollow hold","Abdomen","3","20-40 s","45 s","Mantener abdomen activo."],
+["Escalador cruzado","Abdomen","3","20-30","45 s","Mantener el tronco estable."],
+["Bicicleta reclinada","Cardio","1","20-30 min","-","Ritmo moderado y sostenido."]];
+const storage={get(k){try{return window.localStorage.getItem(k)}catch(e){return window.__pfMem?.[k]??null}},set(k,v){try{window.localStorage.setItem(k,v)}catch(e){window.__pfMem=window.__pfMem||{};window.__pfMem[k]=v}}};
+function leerJSON(clave, respaldo){try{const raw=storage.get(clave);return raw?JSON.parse(raw):respaldo}catch(err){return respaldo}}
+const baseData={alumnos:[],ejercicios:[],rutinas:[]};
+const basePerfil={profesor:"",gimnasio:"",telefono:""};
+let data=leerJSON(KEY,null);
+if(!data||typeof data!=="object"||!Array.isArray(data.alumnos)||!Array.isArray(data.ejercicios)||!Array.isArray(data.rutinas)){data=leerJSON(OLD_KEY,baseData)}
+if(!data||typeof data!=="object")data=leerJSON(LEGACY_KEY,baseData);
+if(!Array.isArray(data.alumnos))data.alumnos=[];
+if(!Array.isArray(data.ejercicios))data.ejercicios=[];
+if(!Array.isArray(data.rutinas))data.rutinas=[];
+let perfil=leerJSON(PROFILE_KEY,null);
+if(!perfil||typeof perfil!=="object")perfil=leerJSON(OLD_PROFILE_KEY,basePerfil);
+if(!perfil||typeof perfil!=="object")perfil=leerJSON(LEGACY_PROFILE_KEY,basePerfil);
+const $=id=>document.getElementById(id), save=()=>storage.set(KEY,JSON.stringify(data)), savePerfil=()=>storage.set(PROFILE_KEY,JSON.stringify(perfil));
+// Biblioteca inicial: agrega todos los ejercicios base que falten sin borrar los personalizados.
+const presetNames=new Set(data.ejercicios.map(e=>String(e.nombre||"").trim().toLowerCase()));
+for(const p of presets){const nombre=p[0].trim().toLowerCase();if(!presetNames.has(nombre)){data.ejercicios.push({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""});presetNames.add(nombre)}}
 save();
-if(!data.ejercicios.length)data.ejercicios=presets.map(p=>({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""}));
-const $=id=>document.getElementById(id), save=()=>localStorage.setItem(KEY,JSON.stringify(data)), savePerfil=()=>localStorage.setItem(PROFILE_KEY,JSON.stringify(perfil));
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
-function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length}
+function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length;if($("bibliotecaTotal"))$("bibliotecaTotal").textContent=`(${data.ejercicios.length} ejercicios)`}
 function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?esc(a.telefono):""}</p><div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
 function updateAlumnoSelect(){$("alumnoRutina").innerHTML='<option value="">Seleccionar alumno</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join("")}
 $("btnNuevoAlumno").onclick=()=>{resetAlumno();$("formAlumno").classList.remove("hidden")};
@@ -202,7 +239,7 @@ window.descargarPDF=async function(x){
 $("perfilForm").onsubmit=e=>{e.preventDefault();perfil={profesor:$("nombreProfesor").value.trim(),gimnasio:$("nombreGimnasio").value.trim(),telefono:$("telefonoProfesor").value.trim()};savePerfil();actualizarPerfil();alert("Datos guardados.")};
 function cargarPerfil(){$("nombreProfesor").value=perfil.profesor||"";$("nombreGimnasio").value=perfil.gimnasio||"";$("telefonoProfesor").value=perfil.telefono||"";actualizarPerfil()}
 function actualizarPerfil(){const p=[perfil.profesor,perfil.gimnasio].filter(Boolean);$("encabezadoPerfil").textContent=p.length?p.join(" · "):"Gestión simple y rápida de rutinas para tus alumnos"}
-fillCats();cargarPerfil();renderAlumnos();renderEjercicios();renderRutinas();updateCounts();
+try{fillCats();cargarPerfil();renderAlumnos();renderEjercicios();renderRutinas();updateCounts()}catch(err){console.error("Error de inicialización",err);try{updateCounts()}catch(e){}}
 })();
 </script>
 </body>
