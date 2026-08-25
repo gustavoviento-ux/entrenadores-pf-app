@@ -110,6 +110,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 <script>
 (function(){
 "use strict";
+window.addEventListener("error",function(ev){console.error("Entrenadores PF:",ev.error||ev.message)});
 const KEY="entrenadoresPF_v8", PROFILE_KEY="entrenadoresPF_perfil_v8";
 const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
@@ -152,7 +153,7 @@ $("buscarEjercicio").oninput=renderEjercicios;$("filtroCategoria").onchange=rend
 $("btnNuevoEjercicio").onclick=()=>{resetEjercicio();$("formEjercicio").classList.remove("hidden")};$("cancelarEjercicio").onclick=()=>$("formEjercicio").classList.add("hidden");
 function resetEjercicio(){$("ejercicioForm").reset();$("ejercicioId").value="";$("vistaImagen").innerHTML="";$("tituloFormEjercicio").textContent="Nuevo ejercicio"}
 window.editarEjercicio=function(x){const e=data.ejercicios.find(e=>e.id===x);if(!e)return;$("ejercicioId").value=e.id;$("nombreEjercicio").value=e.nombre;$("categoriaEjercicio").value=e.categoria;$("seriesEjercicio").value=e.series||"";$("repsEjercicio").value=e.reps||"";$("descansoEjercicio").value=e.descanso||"";$("indicacionesEjercicio").value=e.indicaciones||"";$("vistaImagen").innerHTML=e.imagen?`<img class="exercise-thumb" src="${e.imagen}"> Imagen guardada`:"";$("tituloFormEjercicio").textContent="Editar ejercicio";$("formEjercicio").classList.remove("hidden");nav("ejercicios")};
-window.borrarEjercicio=function(x){if(confirm("¿Eliminar este ejercicio?")){data.ejercicios=data.ejercicios.filter(e=>e.id!==x);data.rutinas.forEach(r=>r.ejercicios=r.ejercicios.filter(i=>i!==x));save();renderEjercicios();renderRutinas()}};
+window.borrarEjercicio=function(x){if(confirm("¿Eliminar este ejercicio?")){data.ejercicios=data.ejercicios.filter(e=>e.id!==x);data.rutinas.forEach(r=>{r.ejercicios=(r.ejercicios||[]).filter(i=>i!==x);if(r.diaEjercicios)Object.keys(r.diaEjercicios).forEach(d=>r.diaEjercicios[d]=(r.diaEjercicios[d]||[]).filter(i=>i!==x))});save();renderEjercicios();renderRutinas()}};
 $("ejercicioForm").onsubmit=async e=>{e.preventDefault();const x=$("ejercicioId").value;const old=data.ejercicios.find(z=>z.id===x);let imagen=old?.imagen||"";const file=$("imagenEjercicio").files[0];if(file)imagen=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const obj={id:x||id(),nombre:$("nombreEjercicio").value.trim(),categoria:$("categoriaEjercicio").value,series:$("seriesEjercicio").value,reps:$("repsEjercicio").value,descanso:$("descansoEjercicio").value,indicaciones:$("indicacionesEjercicio").value.trim(),imagen};if(x){data.ejercicios[data.ejercicios.findIndex(z=>z.id===x)]=obj}else data.ejercicios.push(obj);save();resetEjercicio();$("formEjercicio").classList.add("hidden");renderEjercicios();renderRutinas()};
 
 function diasSeleccionados(){return [...document.querySelectorAll('.diaSemana:checked')].map(x=>x.value)}
@@ -180,7 +181,7 @@ $("rutinaForm").onsubmit=e=>{
  if(!$("alumnoRutina").value)return alert('Seleccioná un alumno.');
  if(!dias.length)return alert('Seleccioná al menos un día de la semana.');
  const diaEjercicios={};let total=0;
- for(const d of dias){diaEjercicios[d]=[...document.querySelectorAll(`#ejerciciosSeleccionados input[data-day="${CSS.escape(d)}"]:checked`)].map(i=>i.value);const principales=diaEjercicios[d].map(i=>data.ejercicios.find(e=>e.id===i)).filter(e=>e&&e.categoria!=='Abdomen');if(principales.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales. Los de Abdomen no cuentan.`);total+=diaEjercicios[d].length}
+ for(const d of dias){diaEjercicios[d]=[...[...document.querySelectorAll('#ejerciciosSeleccionados input:checked')].filter(i=>i.dataset.day===d)].map(i=>i.value);const principales=diaEjercicios[d].map(i=>data.ejercicios.find(e=>e.id===i)).filter(e=>e&&e.categoria!=='Abdomen');if(principales.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales. Los de Abdomen no cuentan.`);total+=diaEjercicios[d].length}
  if(!total)return alert('Seleccioná al menos un ejercicio en alguno de los días.');
  const first=diaEjercicios[dias[0]]||[];
  const r={id:x||id(),nombre:$("nombreRutina").value.trim(),alumnoId:$("alumnoRutina").value,tipo:$("tipoRutina").value,dias,dia:dias[0],diaEjercicios,ejercicios:first,notas:$("notasRutina").value.trim()};
