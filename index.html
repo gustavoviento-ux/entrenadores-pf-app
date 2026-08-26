@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores P.F. — v11.9</title>
+<title>Entrenadores P.F. — v12-v13</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -27,7 +27,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </style>
 </head>
 <body>
-<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v11.9</div></div></header>
+<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v12-v13</div></div></header>
 <main>
 <nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
@@ -81,6 +81,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 
 <section id="rutinas" class="view">
 <div class="section-title"><h2>Rutinas</h2><button class="primary" id="btnNuevaRutina">+ Nueva rutina</button></div>
+<div class="quick"><input id="buscarRutina" placeholder="Buscar rutina o alumno..."></div>
 <div id="formRutina" class="card hidden">
 <h3 id="tituloFormRutina">Nueva rutina</h3>
 <form id="rutinaForm">
@@ -175,6 +176,7 @@ save();
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
+if($("buscarRutina"))$("buscarRutina").oninput=renderRutinas;
 function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length;if($("bibliotecaTotal"))$("bibliotecaTotal").textContent=`(${data.ejercicios.length} ejercicios)`}
 function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?esc(a.telefono):""}</p><div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
 function updateAlumnoSelect(){$("alumnoRutina").innerHTML='<option value="">Seleccionar alumno</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join("")}
@@ -218,11 +220,32 @@ function renderEjerciciosRutina(preselected){
   }).join('');
 }
 function diasChange(){renderEjerciciosRutina()}
+document.addEventListener("change",e=>{
+ if(!e.target.matches('#ejerciciosSeleccionados input[type="checkbox"]'))return;
+ const d=e.target.dataset.day;
+ const checked=[...document.querySelectorAll('#ejerciciosSeleccionados input[type="checkbox"]:checked')].filter(i=>i.dataset.day===d);
+ const principal=checked.map(i=>data.ejercicios.find(x=>x.id===i.value)).filter(Boolean).filter(x=>x.categoria!=="Abdomen").length;
+ if(principal>6){e.target.checked=false;alert(`En ${d} podés usar hasta 6 ejercicios principales. Los de Abdomen no cuentan.`)}
+});
 document.querySelectorAll('.diaSemana').forEach(c=>c.onchange=diasChange);
 $("btnNuevaRutina").onclick=()=>{resetRutina();renderEjerciciosRutina();$("formRutina").classList.remove("hidden")};
 $("cancelarRutina").onclick=()=>$('formRutina').classList.add('hidden');
 function resetRutina(){$("rutinaForm").reset();$("rutinaId").value="";$('tituloFormRutina').textContent='Nueva rutina';$('tipoRutina').value='semanal';document.querySelectorAll('.diaSemana').forEach(c=>c.checked=false);$('ejerciciosSeleccionados').innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>'}
-function renderRutinas(){const box=$("listaRutinas");if(!data.rutinas.length){box.innerHTML='<div class="notice">Todavía no cargaste rutinas.</div>';return}box.innerHTML=data.rutinas.map(r=>{const a=data.alumnos.find(x=>x.id===r.alumnoId);const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);const total=dias.reduce((n,d)=>n+ejerciciosDelDia(r,d).length,0);return `<div class="card" style="margin:12px 0"><div class="section-title"><h3>${esc(r.nombre)}</h3><span class="muted">${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}</span></div><p>Alumno: <b>${esc(a?.nombre||'Sin asignar')}</b></p><p>📅 ${esc(dias.join(' · ')||'Sin días')}</p><p><b>${total}</b> ejercicios en la semana</p><p>${esc(r.notas||'')}</p><div class="actions"><button class="primary" onclick="compartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="editarRutina('${r.id}')">Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`}).join('')}
+function renderRutinas(){
+ const box=$("listaRutinas");
+ const q=($("buscarRutina")?.value||"").toLowerCase().trim();
+ const list=data.rutinas.filter(r=>{
+   const a=data.alumnos.find(x=>x.id===r.alumnoId);
+   return !q || String(r.nombre||"").toLowerCase().includes(q) || String(a?.nombre||"").toLowerCase().includes(q);
+ });
+ if(!list.length){box.innerHTML='<div class="notice">'+(data.rutinas.length?'No hay rutinas que coincidan con la búsqueda.':'Todavía no cargaste rutinas.')+'</div>';return}
+ box.innerHTML=list.map(r=>{
+   const a=data.alumnos.find(x=>x.id===r.alumnoId);
+   const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);
+   const total=dias.reduce((n,d)=>n+ejerciciosDelDia(r,d).length,0);
+   return `<div class="card" style="margin:12px 0"><div class="section-title"><h3>${esc(r.nombre)}</h3><span class="muted">${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}</span></div><p>Alumno: <b>${esc(a?.nombre||'Sin asignar')}</b></p><p>📅 ${esc(dias.join(' · ')||'Sin días')}</p><p><b>${total}</b> ejercicios en la semana</p><p>${esc(r.notas||'')}</p><div class="actions"><button class="primary" onclick="compartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="editarRutina('${r.id}')">Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`
+ }).join('');
+}
 $("rutinaForm").onsubmit=e=>{
  e.preventDefault();const x=$("rutinaId").value;const dias=diasSeleccionados();
  if(!$("alumnoRutina").value)return alert('Seleccioná un alumno.');
@@ -289,7 +312,7 @@ async function construirPDFBlob(x){
    y+=7;
  }
  doc.setFontSize(7);doc.setTextColor(110,110,110);doc.text('Generado con Entrenadores P.F.',M,289);
- return {blob:doc.output('blob'),filename:(r.nombre||'rutina')+'.pdf'};
+ return {blob:doc.output('blob'),filename:(String(r.nombre||'rutina').replace(/[\\/:*?"<>|]/g,'_').trim()||'rutina')+'.pdf'};
 }
 window.descargarPDF=async function(x){
  try{const out=await construirPDFBlob(x);const url=URL.createObjectURL(out.blob);const a=document.createElement('a');a.href=url;a.download=out.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}catch(err){console.error(err);alert('No se pudo generar el PDF: '+(err.message||err))}
