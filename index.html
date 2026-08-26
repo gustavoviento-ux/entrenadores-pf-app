@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores P.F. — v13.0</title>
+<title>Entrenadores P.F. — v14</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -23,14 +23,12 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 .exercise-img{width:100%;max-height:190px;object-fit:cover;border-radius:10px;margin:8px 0}.exercise-thumb{width:70px;height:55px;object-fit:cover;border-radius:8px;vertical-align:middle;margin-right:8px}
 .day-box{border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;background:#fafafa}.days-grid{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:8px;margin-top:10px}.days-grid label{padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff}.routine-day{border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.routine-day h4{margin:0 0 8px}.exercise-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.exercise-list label{padding:6px;border-radius:7px}.exercise-list label:hover{background:#f3f4f6}@media(max-width:600px){.days-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise-list{grid-template-columns:1fr}}
 .small{font-size:12px}.hidden{display:none!important}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.13);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}.brand-mark svg{width:31px;height:31px}.brand-tag{font-size:11px;letter-spacing:.8px;text-transform:uppercase;opacity:.72;margin-top:1px}.zone-title{margin:12px 0 6px;padding:8px 10px;border-radius:8px;background:#f0effc;font-weight:800;color:#30236b}.category-title{margin:8px 0 4px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.4px}.exercise-row{display:grid;grid-template-columns:28px 1fr 92px;align-items:center;gap:6px;padding:6px 7px;border-radius:8px}.exercise-row:hover{background:#f3f4f6}.exercise-row input[type=checkbox]{width:18px;height:18px;margin:0}.peso-input{padding:7px 8px!important;font-size:13px!important}.pdf-logo{display:flex;align-items:center;gap:10px}.pdf-logo-mark{width:38px;height:38px;border-radius:9px;background:#222;color:#fff;display:grid;place-items:center}.pdf-logo-mark svg{width:27px;height:27px}.pdf-logo-text{font-size:22px;font-weight:800}.pdf-sub{font-size:11px;color:#666;margin-top:2px}@media(max-width:600px){.exercise-row{grid-template-columns:28px 1fr 78px}}
+.quick-config{background:#f8f7ff;border:1px solid #e7e1ff;border-radius:14px;padding:12px;margin:10px 0}.quick-config-title{font-weight:800;color:#30236b;margin-bottom:8px}.rep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rep-grid input{min-width:0;text-align:center;padding:9px}.weight-options{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:7px}.weight-options label{display:flex;align-items:center;gap:6px;padding:8px;border:1px solid var(--border);border-radius:9px;background:#fff;font-size:12px;font-weight:700}.weight-options input{width:auto}.exercise-row{grid-template-columns:28px 1fr minmax(150px,180px);}.peso-controls{display:flex;flex-direction:column;gap:4px}.series-select{padding:7px 8px!important;font-size:12px!important}.series-select{padding:7px 8px!important;font-size:12px!important}.peso-extra{font-size:11px;padding:6px 8px!important}@media(max-width:600px){.exercise-row{grid-template-columns:28px 1fr}.peso-controls{grid-column:2}.rep-grid{grid-template-columns:repeat(4,1fr)}.weight-options{grid-template-columns:repeat(2,1fr)}}
 .hero{background:linear-gradient(135deg,#17152f 0%,#30236b 60%,#7c3aed 100%);color:#fff;border-radius:20px;padding:26px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 16px 40px rgba(48,35,107,.22)}.hero:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-80px;bottom:-120px;background:rgba(6,182,212,.25)}.hero h2{font-size:27px;margin:0 0 7px}.hero p{margin:0;max-width:650px;opacity:.88;line-height:1.5}.stat-card{position:relative;overflow:hidden}.stat-card:before{content:"";position:absolute;right:-25px;top:-25px;width:90px;height:90px;border-radius:50%;background:rgba(124,58,237,.08)}.stat-icon{font-size:24px;margin-bottom:4px}@media(max-width:600px){main{padding:12px}.row>*{min-width:100%}}
-
-/* V12 */
-.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.quick-actions button{min-height:48px}.routine-tabs{display:flex;gap:7px;overflow-x:auto;padding:8px 0 10px}.routine-tab{white-space:nowrap;border:1px solid #ccc;border-radius:999px;padding:9px 13px;background:#fff;font-weight:700}.routine-tab.active{background:#222;color:#fff;border-color:#222}.routine-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;margin:8px 0}.exercise-search-results{display:grid;gap:7px;margin:8px 0}.quick-exercise{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #ddd;border-radius:10px;padding:9px;background:#fafafa}.selected-list{display:grid;gap:7px;margin-top:8px}.selected-exercise{display:grid;grid-template-columns:28px minmax(0,1fr) 80px auto;gap:7px;align-items:center;border:1px solid #ddd;border-radius:10px;padding:8px;background:#fff}.selected-exercise .move{display:flex;flex-direction:column;gap:3px}.selected-exercise .move button{padding:3px 7px;line-height:1}.selected-exercise .peso-input{width:100%}.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(max-width:600px){.quick-actions{grid-template-columns:1fr 1fr}.routine-tools{grid-template-columns:1fr}.selected-exercise{grid-template-columns:28px minmax(0,1fr) 74px}.selected-exercise .remove{grid-column:2/4}.profile-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v13.0</div></div></header>
+<header><div class="header"><div class="brand"><div class="brand-mark" aria-label="Logo Entrenadores P.F."><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="7" y="28" width="50" height="8" rx="4" fill="currentColor"/><rect x="11" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="44" y="17" width="9" height="30" rx="3" fill="currentColor"/><rect x="4" y="22" width="7" height="20" rx="3" fill="currentColor"/><rect x="53" y="22" width="7" height="20" rx="3" fill="currentColor"/></svg></div><div><div class="logo">Entrenadores P.F.</div><div class="brand-tag">Rutinas · Progreso · Rendimiento</div></div></div><div class="subtitle" id="encabezadoPerfil">Gestión profesional de rutinas para tus alumnos · v14</div></div></header>
 <main>
 <nav id="nav">
 <button class="active" data-view="inicio">Inicio</button>
@@ -47,7 +45,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 <div class="card stat-card"><div class="stat-icon">📋</div><div class="muted">Rutinas</div><div class="number" id="countRutinas">0</div></div>
 <div class="card stat-card"><div class="stat-icon">🏋️</div><div class="muted">Ejercicios</div><div class="number" id="countEjercicios">0</div></div>
 </div>
-<div class="card" style="margin-top:16px"><h3>🚀 Accesos rápidos</h3><p>Creá alumnos, rutinas y ejercicios sin recorrer toda la aplicación.</p><div class="quick-actions"><button onclick="nav('alumnos');document.getElementById('btnNuevoAlumno').click()">👤 Nuevo alumno</button><button class="primary" onclick="nav('rutinas');document.getElementById('btnNuevaRutina').click()">📋 Nueva rutina</button><button onclick="nav('ejercicios');document.getElementById('btnNuevoEjercicio').click()">🏋️ Nuevo ejercicio</button></div></div>
+<div class="card" style="margin-top:16px"><h3>🚀 Empezá ahora</h3><p>Creá tu primer alumno, armá su rutina y después compartila por WhatsApp o descargala en PDF. Todo queda guardado en este dispositivo.</p></div>
 </section>
 
 <section id="alumnos" class="view">
@@ -58,8 +56,6 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 <input type="hidden" id="alumnoId">
 <div class="row"><input id="nombreAlumno" placeholder="Nombre y apellido" required><input id="telefonoAlumno" placeholder="WhatsApp (opcional)"></div>
 <div class="row"><input id="edadAlumno" type="number" placeholder="Edad"><input id="objetivoAlumno" placeholder="Objetivo"></div>
-<div class="profile-grid"><textarea id="patologiasAlumno" placeholder="Patologías / enfermedades"></textarea><textarea id="lesionesAlumno" placeholder="Lesiones"></textarea></div>
-<textarea id="observacionesAlumno" placeholder="Observaciones"></textarea>
 <div class="actions"><button class="primary">Guardar alumno</button><button type="button" id="cancelarAlumno">Cancelar</button></div>
 </form>
 </div>
@@ -85,9 +81,21 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 </section>
 
 <section id="rutinas" class="view">
-<div class="section-title"><h2>Rutinas <span class="muted small">V13</span></h2><button class="primary" id="btnNuevaRutina">+ Nueva rutina</button></div>
-<div id="formRutina" class="card hidden"><h3 id="tituloFormRutina">Nueva rutina</h3><form id="rutinaForm"><input type="hidden" id="rutinaId"><div class="row"><input id="nombreRutina" placeholder="Nombre de la rutina" required><select id="alumnoRutina" required></select></div><div class="row"><select id="tipoRutina"><option value="diaria">Rutina diaria</option><option value="semanal">Rutina semanal</option></select><div id="diasSemanaBox" class="day-box"><b>Días de entrenamiento:</b><div class="days-grid"><label><input type="checkbox" class="diaSemana" value="Lunes"> Lunes</label><label><input type="checkbox" class="diaSemana" value="Martes"> Martes</label><label><input type="checkbox" class="diaSemana" value="Miércoles"> Miércoles</label><label><input type="checkbox" class="diaSemana" value="Jueves"> Jueves</label><label><input type="checkbox" class="diaSemana" value="Viernes"> Viernes</label><label><input type="checkbox" class="diaSemana" value="Sábado"> Sábado</label><label><input type="checkbox" class="diaSemana" value="Domingo"> Domingo</label></div><div class="small muted">Elegí entre 1 y 7 días. Cada día tiene sus propios ejercicios.</div></div></div><textarea id="notasRutina" placeholder="Indicaciones generales"></textarea><div id="ejerciciosSeleccionados" class="day-box"></div><div class="actions"><button class="primary">Guardar rutina</button><button type="button" id="cancelarRutina">Cancelar</button></div></form></div><div class="quick"><select id="filtroAlumnoRutinas"><option value="">Todos los alumnos</option></select><input id="buscarRutina" placeholder="Buscar rutina..."></div><div id="listaRutinas"></div>
+<div class="section-title"><h2>Rutinas</h2><button class="primary" id="btnNuevaRutina">+ Nueva rutina</button></div>
+<div id="formRutina" class="card hidden">
+<h3 id="tituloFormRutina">Nueva rutina</h3>
+<form id="rutinaForm">
+<input type="hidden" id="rutinaId">
+<div class="row"><input id="nombreRutina" placeholder="Nombre de la rutina" required><select id="alumnoRutina" required></select></div>
+<div class="row"><select id="tipoRutina"><option value="diaria">Rutina diaria</option><option value="semanal">Rutina semanal</option></select><div id="diasSemanaBox" class="day-box"><b>Días de entrenamiento:</b><div class="days-grid"><label><input type="checkbox" class="diaSemana" value="Lunes"> Lunes</label><label><input type="checkbox" class="diaSemana" value="Martes"> Martes</label><label><input type="checkbox" class="diaSemana" value="Miércoles"> Miércoles</label><label><input type="checkbox" class="diaSemana" value="Jueves"> Jueves</label><label><input type="checkbox" class="diaSemana" value="Viernes"> Viernes</label><label><input type="checkbox" class="diaSemana" value="Sábado"> Sábado</label><label><input type="checkbox" class="diaSemana" value="Domingo"> Domingo</label></div><div class="small muted">Marcá los días que entrena el alumno.</div></div></div>
+<textarea id="notasRutina" placeholder="Indicaciones generales"></textarea>
+<div><b>Ejercicios por día:</b><div id="ejerciciosSeleccionados" class="day-box"></div></div>
+<div class="actions"><button class="primary">Guardar rutina</button><button type="button" id="cancelarRutina">Cancelar</button></div>
+</form>
+</div>
+<div id="listaRutinas"></div>
 </section>
+
 <section id="perfil" class="view">
 <h2>Profesor / Gimnasio</h2>
 <div class="card"><form id="perfilForm">
@@ -104,11 +112,11 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);bor
 (function(){
 "use strict";
 window.addEventListener("error",function(ev){console.error("Entrenadores PF:",ev.error||ev.message)});
-const KEY="entrenadoresPF_v13", PROFILE_KEY="entrenadoresPF_perfil_v13";
-const OLD_KEY="entrenadoresPF_v11_5", OLD_PROFILE_KEY="entrenadoresPF_perfil_v11_5";
-const LEGACY_KEY="entrenadoresPF_v11_4", LEGACY_PROFILE_KEY="entrenadoresPF_perfil_v11_4";
+const KEY="entrenadoresPF_v11_5", PROFILE_KEY="entrenadoresPF_perfil_v11_5";
+const OLD_KEY="entrenadoresPF_v11_4", OLD_PROFILE_KEY="entrenadoresPF_perfil_v11_4";
+const LEGACY_KEY="entrenadoresPF_v11_3", LEGACY_PROFILE_KEY="entrenadoresPF_perfil_v11_3";
 const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-const CATS=["Pecho","Espalda","Cuádriceps","Isquiosurales","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
+const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
 const ZONE_MAP={"Tren superior":["Pecho","Espalda","Hombros","Bíceps","Tríceps"],"Tren inferior":["Piernas","Glúteos"],"Zona media":["Abdomen"],"Cardio y acondicionamiento":["Cardio"],"Otros":["Otros"]};
 const presets=[
 ["Press banca","Pecho","4","8-12","90 s","Controlar la bajada."],["Press inclinado con mancuernas","Pecho","4","8-12","90 s","Recorrido controlado."],["Aperturas con mancuernas","Pecho","3","10-15","60 s","No cerrar bruscamente."],["Press declinado","Pecho","3","8-12","90 s","Controlar el recorrido."],["Press plano con mancuernas","Pecho","4","8-12","90 s","Mantener escápulas estables."],["Press inclinado con barra","Pecho","4","8-10","120 s","Evitar rebotes."],["Cruce de poleas","Pecho","3","12-15","60 s","Juntar las manos con control."],["Peck deck","Pecho","3","10-15","60 s","No llevar hombros hacia adelante."],["Fondos para pecho","Pecho","3","8-12","90 s","Inclinar levemente el torso."],["Flexiones","Pecho","3","10-20","60 s","Cuerpo alineado."],
@@ -164,27 +172,20 @@ const $=id=>document.getElementById(id), save=()=>storage.set(KEY,JSON.stringify
 // Biblioteca inicial: agrega todos los ejercicios base que falten sin borrar los personalizados.
 const presetNames=new Set(data.ejercicios.map(e=>String(e.nombre||"").trim().toLowerCase()));
 for(const p of presets){const nombre=p[0].trim().toLowerCase();if(!presetNames.has(nombre)){data.ejercicios.push({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""});presetNames.add(nombre)}}
-data.alumnos.forEach(a=>{a.patologias=a.patologias||"";a.lesiones=a.lesiones||"";a.observaciones=a.observaciones||""});
 save();
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
 function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length;if($("bibliotecaTotal"))$("bibliotecaTotal").textContent=`(${data.ejercicios.length} ejercicios)`}
-function updateAlumnoSelect(selectedId=""){
-  const sel=$("alumnoRutina");
-  if(!sel)return;
-  const current=selectedId||sel.value||"";
-  sel.innerHTML='<option value="">Seleccioná un alumno</option>'+
-    data.alumnos.map(a=>`<option value="${esc(a.id)}">${esc(a.nombre)}</option>`).join("");
-  if(data.alumnos.some(a=>a.id===current))sel.value=current;
-}
-function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?"📱 "+esc(a.telefono):""}</p>${a.patologias?`<p><b>Patologías:</b> ${esc(a.patologias)}</p>`:""}${a.lesiones?`<p><b>Lesiones:</b> ${esc(a.lesiones)}</p>`:""}${a.observaciones?`<p><b>Observaciones:</b> ${esc(a.observaciones)}</p>`:""}<div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
+function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?esc(a.telefono):""}</p><div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
+function updateAlumnoSelect(){$("alumnoRutina").innerHTML='<option value="">Seleccionar alumno</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join("")}
 $("btnNuevoAlumno").onclick=()=>{resetAlumno();$("formAlumno").classList.remove("hidden")};
 $("cancelarAlumno").onclick=()=>$("formAlumno").classList.add("hidden");
 function resetAlumno(){$("alumnoForm").reset();$("alumnoId").value="";$("tituloFormAlumno").textContent="Nuevo alumno"}
-window.editarAlumno=function(x){const a=data.alumnos.find(a=>a.id===x);if(!a)return;$("alumnoId").value=a.id;$("nombreAlumno").value=a.nombre;$("telefonoAlumno").value=a.telefono||"";$("edadAlumno").value=a.edad||"";$("objetivoAlumno").value=a.objetivo||"";$("patologiasAlumno").value=a.patologias||"";$("lesionesAlumno").value=a.lesiones||"";$("observacionesAlumno").value=a.observaciones||"";$("tituloFormAlumno").textContent="Editar alumno";$("formAlumno").classList.remove("hidden");nav("alumnos")};
-window.borrarAlumno=function(x){if(confirm("¿Eliminar este alumno y sus rutinas?")){data.alumnos=data.alumnos.filter(a=>a.id!==x);data.rutinas=data.rutinas.filter(r=>r.alumnoId!==x);save();renderAlumnos();renderRutinas();updateCounts()}};
-$("alumnoForm").onsubmit=e=>{e.preventDefault();const x=$("alumnoId").value;const a={id:x||id(),nombre:$("nombreAlumno").value.trim(),telefono:$("telefonoAlumno").value.trim(),edad:$("edadAlumno").value,objetivo:$("objetivoAlumno").value.trim(),patologias:$("patologiasAlumno").value.trim(),lesiones:$("lesionesAlumno").value.trim(),observaciones:$("observacionesAlumno").value.trim()};if(x){const i=data.alumnos.findIndex(z=>z.id===x);data.alumnos[i]={...data.alumnos[i],...a}}else data.alumnos.push(a);save();resetAlumno();$("formAlumno").classList.add("hidden");renderAlumnos();updateCounts()};
+window.editarAlumno=function(x){const a=data.alumnos.find(a=>a.id===x);if(!a)return;$("alumnoId").value=a.id;$("nombreAlumno").value=a.nombre;$("telefonoAlumno").value=a.telefono||"";$("edadAlumno").value=a.edad||"";$("objetivoAlumno").value=a.objetivo||"";$("tituloFormAlumno").textContent="Editar alumno";$("formAlumno").classList.remove("hidden");nav("alumnos")};
+window.borrarAlumno=function(x){if(confirm("¿Eliminar este alumno?")){data.alumnos=data.alumnos.filter(a=>a.id!==x);data.rutinas=data.rutinas.filter(r=>r.alumnoId!==x);save();renderAlumnos();renderRutinas();updateCounts()}};
+$("alumnoForm").onsubmit=e=>{e.preventDefault();const x=$("alumnoId").value;const a={id:x||id(),nombre:$("nombreAlumno").value.trim(),telefono:$("telefonoAlumno").value.trim(),edad:$("edadAlumno").value,objetivo:$("objetivoAlumno").value.trim()};if(x){const i=data.alumnos.findIndex(z=>z.id===x);data.alumnos[i]=a}else data.alumnos.push(a);save();resetAlumno();$("formAlumno").classList.add("hidden");renderAlumnos();updateCounts()};
+
 function fillCats(){const opts=CATS.map(c=>`<option>${c}</option>`).join("");$("categoriaEjercicio").innerHTML=opts;$("filtroCategoria").innerHTML='<option value="">Todas las zonas</option>'+opts}
 function renderEjercicios(){const q=$("buscarEjercicio").value.toLowerCase().trim(),cat=$("filtroCategoria").value;const list=data.ejercicios.filter(e=>(!q||e.nombre.toLowerCase().includes(q))&&(!cat||e.categoria===cat));$("listaEjercicios").innerHTML=list.length?list.map(e=>`<div class="card">${e.imagen?`<img class="exercise-img" src="${e.imagen}" alt="">`:""}<h3>${esc(e.nombre)}</h3><div class="muted">${esc(e.categoria)} · ${esc(e.series||"-")} series · ${esc(e.reps||"-")} reps · ${esc(e.descanso||"-")}</div><p>${esc(e.indicaciones||"")}</p><div class="actions"><button onclick="editarEjercicio('${e.id}')">Editar</button><button class="danger" onclick="borrarEjercicio('${e.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">No hay ejercicios que coincidan.</div>';updateCounts()}
 $("buscarEjercicio").oninput=renderEjercicios;$("filtroCategoria").onchange=renderEjercicios;
@@ -192,49 +193,64 @@ $("btnNuevoEjercicio").onclick=()=>{resetEjercicio();$("formEjercicio").classLis
 function resetEjercicio(){$("ejercicioForm").reset();$("ejercicioId").value="";$("vistaImagen").innerHTML="";$("tituloFormEjercicio").textContent="Nuevo ejercicio"}
 window.editarEjercicio=function(x){const e=data.ejercicios.find(e=>e.id===x);if(!e)return;$("ejercicioId").value=e.id;$("nombreEjercicio").value=e.nombre;$("categoriaEjercicio").value=e.categoria;$("seriesEjercicio").value=e.series||"";$("repsEjercicio").value=e.reps||"";$("descansoEjercicio").value=e.descanso||"";$("indicacionesEjercicio").value=e.indicaciones||"";$("vistaImagen").innerHTML=e.imagen?`<img class="exercise-thumb" src="${e.imagen}"> Imagen guardada`:"";$("tituloFormEjercicio").textContent="Editar ejercicio";$("formEjercicio").classList.remove("hidden");nav("ejercicios")};
 window.borrarEjercicio=function(x){if(confirm("¿Eliminar este ejercicio?")){data.ejercicios=data.ejercicios.filter(e=>e.id!==x);data.rutinas.forEach(r=>{r.ejercicios=(r.ejercicios||[]).filter(i=>i!==x);if(r.diaEjercicios)Object.keys(r.diaEjercicios).forEach(d=>r.diaEjercicios[d]=(r.diaEjercicios[d]||[]).filter(i=>i!==x))});save();renderEjercicios();renderRutinas()}};
-$("ejercicioForm").onsubmit=async e=>{e.preventDefault();const x=$("ejercicioId").value;const old=data.ejercicios.find(z=>z.id===x);let imagen=old?.imagen||"";const file=$("imagenEjercicio").files[0];if(file)imagen=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const nombre=$("nombreEjercicio").value.trim();const categoria=$("categoriaEjercicio").value;if(!nombre||!categoria){alert("Completá el nombre y la categoría del ejercicio.");return}const obj={id:x||id(),nombre,categoria,series:$("seriesEjercicio").value.trim(),reps:$("repsEjercicio").value.trim(),descanso:$("descansoEjercicio").value.trim(),indicaciones:$("indicacionesEjercicio").value.trim(),imagen};if(x){data.ejercicios[data.ejercicios.findIndex(z=>z.id===x)]=obj}else data.ejercicios.push(obj);save();resetEjercicio();$("formEjercicio").classList.add("hidden");renderEjercicios();renderRutinas()};
+$("ejercicioForm").onsubmit=async e=>{e.preventDefault();const x=$("ejercicioId").value;const old=data.ejercicios.find(z=>z.id===x);let imagen=old?.imagen||"";const file=$("imagenEjercicio").files[0];if(file)imagen=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const obj={id:x||id(),nombre:$("nombreEjercicio").value.trim(),categoria:$("categoriaEjercicio").value,series:$("seriesEjercicio").value,reps:$("repsEjercicio").value,descanso:$("descansoEjercicio").value,indicaciones:$("indicacionesEjercicio").value.trim(),imagen};if(x){data.ejercicios[data.ejercicios.findIndex(z=>z.id===x)]=obj}else data.ejercicios.push(obj);save();resetEjercicio();$("formEjercicio").classList.add("hidden");renderEjercicios();renderRutinas()};
 
-let rutinaDiaActivo="",rutinaDraftRefs={},rutinaSearch="";
 function diasSeleccionados(){return [...document.querySelectorAll('.diaSemana:checked')].map(x=>x.value)}
 function refId(ref){return typeof ref==='string'?ref:(ref&&ref.id)||''}
 function refPeso(ref){return typeof ref==='object'&&ref?String(ref.peso??''):''}
-function normalizarRefs(arr){return (Array.isArray(arr)?arr:[]).map(ref=>({id:refId(ref),peso:refPeso(ref)})).filter(x=>x.id&&data.ejercicios.some(e=>e.id===x.id))}
-function ejerciciosDelDia(r,d){return r.diaEjercicios&&Array.isArray(r.diaEjercicios[d])?r.diaEjercicios[d]:(r.ejercicios||[])}
-function prepararDraft(pre){rutinaDraftRefs={};diasSeleccionados().forEach(d=>rutinaDraftRefs[d]=normalizarRefs(pre?.[d]||[]));if(!rutinaDraftRefs[rutinaDiaActivo])rutinaDiaActivo=diasSeleccionados()[0]||''}
-function renderEjerciciosRutina(pre){if(pre)prepararDraft(pre);else{const ds=diasSeleccionados();ds.forEach(d=>{if(!rutinaDraftRefs[d])rutinaDraftRefs[d]=[]});Object.keys(rutinaDraftRefs).forEach(d=>{if(!ds.includes(d))delete rutinaDraftRefs[d]});if(!ds.includes(rutinaDiaActivo))rutinaDiaActivo=ds[0]||''}const box=$("ejerciciosSeleccionados"),ds=diasSeleccionados();if(!ds.length){box.innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>';return}const sel=normalizarRefs(rutinaDraftRefs[rutinaDiaActivo]||[]),q=String(rutinaSearch||'').toLowerCase().trim(),res=data.ejercicios.filter(e=>(!q||e.nombre.toLowerCase().includes(q)||String(e.categoria||'').toLowerCase().includes(q))&&!sel.some(x=>x.id===e.id)).slice(0,20),main=sel.filter(x=>{const e=data.ejercicios.find(e=>e.id===x.id);return e&&e.categoria!=='Abdomen'}).length;const tabs=ds.map(d=>`<button type="button" class="routine-tab ${d===rutinaDiaActivo?'active':''}" onclick="seleccionarDiaRutina('${esc(d)}')">${esc(d)} <span class="small">(${(rutinaDraftRefs[d]||[]).length})</span></button>`).join('');const selectedHtml=sel.length?sel.map((ref,i)=>{const e=data.ejercicios.find(e=>e.id===ref.id);return `<div class="selected-exercise"><div class="move"><button type="button" onclick="moverEjercicioRutina(${i},-1)" ${i?'':'disabled'}>↑</button><button type="button" onclick="moverEjercicioRutina(${i},1)" ${i===sel.length-1?'disabled':''}>↓</button></div><div><b>${esc(e?.nombre||'Ejercicio')}</b><div class="muted small">${esc(e?.categoria||'')} · ${esc(e?.series||'-')} series · ${esc(e?.reps||'-')} reps</div></div><input class="peso-input" type="text" value="${esc(ref.peso)}" placeholder="Peso" onchange="cambiarPesoRutina(${i},this.value)"><button type="button" class="danger remove" onclick="quitarEjercicioRutina('${esc(ref.id)}')">Quitar</button></div>`}).join(''):'<div class="notice">Todavía no hay ejercicios en este día.</div>';const results=res.length?res.map(e=>`<div class="quick-exercise"><div><b>${esc(e.nombre)}</b><div class="muted small">${esc(e.categoria)} · ${esc(e.series||'-')} series · ${esc(e.reps||'-')} reps</div></div><button type="button" onclick="agregarEjercicioRutina('${esc(e.id)}')">+ Agregar</button></div>`).join(''):'<div class="small muted">No hay coincidencias o ya están agregados.</div>';box.innerHTML=`<div class="routine-tabs">${tabs}</div><div class="routine-tools"><input id="buscarEjercicioRutina" value="${esc(rutinaSearch)}" placeholder="Buscar ejercicio para este día..."><button type="button" onclick="duplicarDiaRutina()">Duplicar día</button></div><div class="small muted"><b>${esc(rutinaDiaActivo)}</b> · ${sel.length} ejercicios · ${main}/6 principales</div><div class="exercise-search-results">${results}</div><h4>Ejercicios del día</h4><div class="selected-list">${selectedHtml}</div>`;const search=$("buscarEjercicioRutina");if(search)search.oninput=()=>{rutinaSearch=search.value;renderEjerciciosRutina()}}
-window.seleccionarDiaRutina=d=>{rutinaDiaActivo=d;rutinaSearch='';renderEjerciciosRutina()};window.agregarEjercicioRutina=idEx=>{const arr=rutinaDraftRefs[rutinaDiaActivo]||(rutinaDraftRefs[rutinaDiaActivo]=[]),e=data.ejercicios.find(e=>e.id===idEx);if(!e||arr.some(x=>x.id===idEx))return;const n=arr.filter(x=>{const z=data.ejercicios.find(e=>e.id===x.id);return z&&z.categoria!=='Abdomen'}).length;if(e.categoria!=='Abdomen'&&n>=6)return alert('Máximo 6 ejercicios principales por día. Los de Abdomen no cuentan.');arr.push({id:idEx,peso:''});renderEjerciciosRutina()};window.quitarEjercicioRutina=idEx=>{rutinaDraftRefs[rutinaDiaActivo]=(rutinaDraftRefs[rutinaDiaActivo]||[]).filter(x=>x.id!==idEx);renderEjerciciosRutina()};window.cambiarPesoRutina=(i,v)=>{if(rutinaDraftRefs[rutinaDiaActivo]?.[i])rutinaDraftRefs[rutinaDiaActivo][i].peso=String(v||'').trim()};window.moverEjercicioRutina=(i,d)=>{const a=rutinaDraftRefs[rutinaDiaActivo]||[],j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];renderEjerciciosRutina()};window.duplicarDiaRutina=()=>{const ds=diasSeleccionados().filter(d=>d!==rutinaDiaActivo);if(!ds.length)return alert('Seleccioná al menos otro día para duplicar.');const target=prompt('¿A qué día querés copiar '+rutinaDiaActivo+'?\n'+ds.join(', '));if(!target||!ds.includes(target))return;rutinaDraftRefs[target]=normalizarRefs(rutinaDraftRefs[rutinaDiaActivo]).map(x=>({...x}));rutinaDiaActivo=target;renderEjerciciosRutina()};
-function diasChange(){const ds=diasSeleccionados();Object.keys(rutinaDraftRefs).forEach(d=>{if(!ds.includes(d))delete rutinaDraftRefs[d]});ds.forEach(d=>{if(!rutinaDraftRefs[d])rutinaDraftRefs[d]=[]});if(!ds.includes(rutinaDiaActivo))rutinaDiaActivo=ds[0]||'';rutinaSearch='';renderEjerciciosRutina()}document.querySelectorAll('.diaSemana').forEach(c=>c.onchange=diasChange);
-$("btnNuevaRutina").onclick=()=>{resetRutina();updateAlumnoSelect();renderEjerciciosRutina();$("formRutina").classList.remove("hidden");nav('rutinas')};$("cancelarRutina").onclick=()=>$('formRutina').classList.add('hidden');function resetRutina(){$("rutinaForm").reset();$("rutinaId").value='';$("tituloFormRutina").textContent='Nueva rutina';$("tipoRutina").value='semanal';document.querySelectorAll('.diaSemana').forEach(c=>c.checked=false);rutinaDraftRefs={};rutinaDiaActivo='';rutinaSearch='';$("ejerciciosSeleccionados").innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>'}
-function fillRutinaFilters(){
-  const sel=$("filtroAlumnoRutinas");
-  if(!sel)return;
-  const current=sel.value||"";
-  sel.innerHTML='<option value="">Todos los alumnos</option>'+
-    data.alumnos.map(a=>`<option value="${esc(a.id)}">${esc(a.nombre)}</option>`).join("");
-  if(data.alumnos.some(a=>a.id===current))sel.value=current;
+function refPesoTipo(ref){return typeof ref==='object'&&ref?String(ref.pesoTipo??''):''}
+function refSeries(ref,e){if(typeof ref==='object'&&ref&&ref.series!=null)return String(ref.series);return String(e?.series||'')}
+function refReps(ref,e){if(typeof ref==='object'&&ref&&ref.reps!=null)return String(ref.reps);return String(e?.reps||'')}
+function normalizarRefs(arr){return (Array.isArray(arr)?arr:[]).map(ref=>({id:refId(ref),peso:refPeso(ref),pesoTipo:refPesoTipo(ref),reps:typeof ref==='object'&&ref?String(ref.reps??''):''})).filter(x=>x.id)}
+function repsInputs(ref,e,d){const raw=refReps(ref,e);const parts=raw.split(/[\/\-]/).map(x=>x.trim()).filter(Boolean);const series=Math.max(1,Math.min(4,parseInt(refSeries(ref,e),10)||parts.length||1));return Array.from({length:4},(_,i)=>`<input class="rep-quick" type="number" min="1" max="999" data-rep-index="${i}" data-rep-day="${esc(d)}" data-rep-ex="${e.id}" value="${esc(parts[i]||'')}" placeholder="${i+1}" ${i<series?'':'disabled'}>`).join('')}
+function repValueFor(ref,e){const raw=refReps(ref,e);return raw||e?.reps||''}
+function ejerciciosDelDia(r,dia){if(r.diaEjercicios&&Array.isArray(r.diaEjercicios[dia]))return r.diaEjercicios[dia];return r.ejercicios||[]}
+function renderEjerciciosRutina(preselected){
+  const dias=diasSeleccionados();
+  const box=$("ejerciciosSeleccionados");
+  if(!dias.length){box.innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>';return}
+  const groups={};
+  data.ejercicios.forEach(e=>(groups[e.categoria]??=[]).push(e));
+  const catsInZone=(zoneCats)=>zoneCats.filter(cat=>groups[cat]?.length);
+  box.innerHTML=dias.map(d=>{
+    const selected=normalizarRefs((preselected&&preselected[d])||[]);
+    const selectedMap=new Map(selected.map(x=>[x.id,x]));
+    const zoneHtml=Object.entries(ZONE_MAP).map(([zone,cats])=>{
+      const available=catsInZone(cats); if(!available.length)return '';
+      const catHtml=available.map(cat=>`<div><div class="category-title">${esc(cat)}</div>${groups[cat].map(e=>{const ref=selectedMap.get(e.id)||{};const series=Math.max(1,Math.min(4,parseInt(e.series,10)||1));return `<div class="exercise-row"><input type="checkbox" data-day="${esc(d)}" value="${e.id}" ${selectedMap.has(e.id)?'checked':''}><span><b>${esc(e.nombre)}</b><br><span class="muted small">${series} series · ${esc(refReps(ref,e)||'-')} reps</span></span><div class="peso-controls"><select class="series-select" data-series-day="${esc(d)}" data-series-ex="${e.id}"><option value="1" ${series===1?'selected':''}>1 serie</option><option value="2" ${series===2?'selected':''}>2 series</option><option value="3" ${series===3?'selected':''}>3 series</option><option value="4" ${series===4?'selected':''}>4 series</option></select><div class="rep-grid" title="Repeticiones por serie">${repsInputs(ref,e,d)}</div><select class="peso-select" data-peso-tipo-day="${esc(d)}" data-peso-tipo-ex="${e.id}"><option value="" ${!ref.pesoTipo?'selected':''}>Peso</option><option value="aumento" ${ref.pesoTipo==='aumento'?'selected':''}>📈 Carga en aumento</option><option value="descenso" ${ref.pesoTipo==='descenso'?'selected':''}>📉 Carga en descenso</option><option value="estable" ${ref.pesoTipo==='estable'?'selected':''}>➡️ Estable</option><option value="sugerido" ${ref.pesoTipo==='sugerido'?'selected':''}>💡 Sugerido</option></select><input class="peso-extra" type="text" data-peso-day="${esc(d)}" data-peso-ex="${e.id}" value="${esc(ref.peso||'')}" placeholder="Kg / carga"></div></div>`}).join('')}</div>`).join('');
+      return `<div class="zone-title">${esc(zone)}</div>${catHtml}`;
+    }).join('');
+    return `<div class="routine-day"><h4>📅 ${esc(d)}</h4><div class="small muted">Seleccioná hasta 6 ejercicios principales + abdominales. En <b>Peso</b> podés anotar kg, carga, banda, etc.</div>${zoneHtml}</div>`;
+  }).join('');
 }
-function renderRutinas(){
-  fillRutinaFilters();
-  const box=$("listaRutinas");
-  if(!data.rutinas.length){box.innerHTML='<div class="notice">Todavía no cargaste rutinas.</div>';return}
-  const alumnoFiltro=$("filtroAlumnoRutinas")?.value||"";
-  const q=($("buscarRutina")?.value||"").toLowerCase().trim();
-  const list=data.rutinas.filter(r=>{
-    const a=data.alumnos.find(x=>x.id===r.alumnoId);
-    return (!alumnoFiltro||r.alumnoId===alumnoFiltro)&&
-      (!q||String(r.nombre||"").toLowerCase().includes(q)||String(a?.nombre||"").toLowerCase().includes(q));
-  });
-  box.innerHTML=list.length?list.map(r=>{
-    const a=data.alumnos.find(x=>x.id===r.alumnoId),ds=r.dias?.length?r.dias:(r.dia?[r.dia]:[]),
-      total=ds.reduce((n,d)=>n+normalizarRefs(ejerciciosDelDia(r,d)).length,0);
-    return `<div class="card" style="margin:12px 0"><div class="section-title"><h3>${esc(r.nombre)}</h3><span class="muted">${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}</span></div><p>Alumno: <b>${esc(a?.nombre||'Sin asignar')}</b></p><p>📅 ${esc(ds.join(' · ')||'Sin días')}</p><p><b>${total}</b> ejercicios en la semana</p><p>${esc(r.notas||'')}</p><div class="actions"><button class="primary" onclick="compartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="editarRutina('${r.id}')">Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`;
-  }).join(""):'<div class="notice">No hay rutinas que coincidan.</div>';
-}
-
-$("rutinaForm").onsubmit=e=>{e.preventDefault();const x=$("rutinaId").value,ds=diasSeleccionados();if(!$('alumnoRutina').value)return alert('Seleccioná un alumno.');if(!ds.length)return alert('Seleccioná al menos un día.');const diaEjercicios={};let total=0;for(const d of ds){const refs=normalizarRefs(rutinaDraftRefs[d]||[]);diaEjercicios[d]=refs;const main=refs.map(x=>data.ejercicios.find(e=>e.id===x.id)).filter(e=>e&&e.categoria!=='Abdomen');if(main.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales.`);total+=refs.length}if(!total)return alert('Agregá al menos un ejercicio.');const r={id:x||id(),nombre:$('nombreRutina').value.trim(),alumnoId:$('alumnoRutina').value,tipo:$('tipoRutina').value,dias:ds,dia:ds[0],diaEjercicios,ejercicios:diaEjercicios[ds[0]],notas:$('notasRutina').value.trim()};if(x){const i=data.rutinas.findIndex(z=>z.id===x);data.rutinas[i]={...data.rutinas[i],...r}}else data.rutinas.push(r);save();$('formRutina').classList.add('hidden');renderRutinas();updateCounts()};
-$("filtroAlumnoRutinas").onchange=renderRutinas;
-$("buscarRutina").oninput=renderRutinas;
-window.editarRutina=x=>{const r=data.rutinas.find(r=>r.id===x);if(!r)return;$("rutinaId").value=r.id;$("nombreRutina").value=r.nombre;updateAlumnoSelect(r.alumnoId);$("alumnoRutina").value=r.alumnoId;$("tipoRutina").value=r.tipo||'semanal';$("notasRutina").value=r.notas||'';const ds=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);document.querySelectorAll('.diaSemana').forEach(c=>c.checked=ds.includes(c.value));rutinaDiaActivo=ds[0]||'';prepararDraft(r.diaEjercicios||Object.fromEntries(ds.map(d=>[d,r.ejercicios||[]])));rutinaSearch='';renderEjerciciosRutina();$("tituloFormRutina").textContent='Editar rutina';$("formRutina").classList.remove('hidden');nav('rutinas')};window.borrarRutina=x=>{if(confirm('¿Eliminar esta rutina?')){data.rutinas=data.rutinas.filter(r=>r.id!==x);save();renderRutinas();updateCounts()}};
+function diasChange(){renderEjerciciosRutina()}
+function actualizarSeriesUI(el){const d=el.dataset.seriesDay, ex=el.dataset.seriesEx, n=Math.max(1,Math.min(4,parseInt(el.value,10)||1));document.querySelectorAll(`.rep-quick[data-rep-day="${CSS.escape(d)}"][data-rep-ex="${CSS.escape(ex)}"]`).forEach((x,i)=>{x.disabled=i>=n;if(i>=n)x.value='';});}
+document.querySelectorAll('.diaSemana').forEach(c=>c.onchange=diasChange);
+$('ejerciciosSeleccionados').addEventListener('change',e=>{if(e.target.matches('.series-select'))actualizarSeriesUI(e.target);});
+$("btnNuevaRutina").onclick=()=>{resetRutina();renderEjerciciosRutina();$("formRutina").classList.remove("hidden")};
+$("cancelarRutina").onclick=()=>$('formRutina').classList.add('hidden');
+function resetRutina(){$("rutinaForm").reset();$("rutinaId").value="";$('tituloFormRutina').textContent='Nueva rutina';$('tipoRutina').value='semanal';document.querySelectorAll('.diaSemana').forEach(c=>c.checked=false);$('ejerciciosSeleccionados').innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>'}
+function renderRutinas(){const box=$("listaRutinas");if(!data.rutinas.length){box.innerHTML='<div class="notice">Todavía no cargaste rutinas.</div>';return}box.innerHTML=data.rutinas.map(r=>{const a=data.alumnos.find(x=>x.id===r.alumnoId);const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);const total=dias.reduce((n,d)=>n+ejerciciosDelDia(r,d).length,0);return `<div class="card" style="margin:12px 0"><div class="section-title"><h3>${esc(r.nombre)}</h3><span class="muted">${r.tipo==='semanal'?'Rutina semanal':'Rutina diaria'}</span></div><p>Alumno: <b>${esc(a?.nombre||'Sin asignar')}</b></p><p>📅 ${esc(dias.join(' · ')||'Sin días')}</p><p><b>${total}</b> ejercicios en la semana</p><p>${esc(r.notas||'')}</p><div class="actions"><button class="primary" onclick="compartirWhatsApp('${r.id}')">💬 WhatsApp</button><button onclick="descargarPDF('${r.id}')">📥 Descargar PDF</button><button onclick="editarRutina('${r.id}')">Editar</button><button class="danger" onclick="borrarRutina('${r.id}')">Eliminar</button></div></div>`}).join('')}
+$("rutinaForm").onsubmit=e=>{
+ e.preventDefault();const x=$("rutinaId").value;const dias=diasSeleccionados();
+ if(!$("alumnoRutina").value)return alert('Seleccioná un alumno.');
+ if(!dias.length)return alert('Seleccioná al menos un día de la semana.');
+ const diaEjercicios={};let total=0;
+ for(const d of dias){
+   const refs=[...document.querySelectorAll('#ejerciciosSeleccionados input[type="checkbox"]:checked')].filter(i=>i.dataset.day===d).map(i=>{const ex=data.ejercicios.find(e=>e.id===i.value);const ss=document.querySelector(`.series-select[data-series-day="${CSS.escape(d)}"][data-series-ex="${CSS.escape(i.value)}"]`);const p=document.querySelector(`.peso-extra[data-peso-day="${CSS.escape(d)}"][data-peso-ex="${CSS.escape(i.value)}"]`);const pt=document.querySelector(`.peso-select[data-peso-tipo-day="${CSS.escape(d)}"][data-peso-tipo-ex="${CSS.escape(i.value)}"]`);const reps=[...document.querySelectorAll(`.rep-quick[data-rep-day="${CSS.escape(d)}"][data-rep-ex="${CSS.escape(i.value)}"]`)].map(x=>x.value.trim()).filter(Boolean).join('/');return {id:i.value,series:ss?.value||ex?.series||'1',peso:p?.value?.trim()||'',pesoTipo:pt?.value||'',reps:reps||ex?.reps||''}});
+   diaEjercicios[d]=refs;
+   const principales=refs.map(x=>data.ejercicios.find(e=>e.id===x.id)).filter(e=>e&&e.categoria!=='Abdomen');
+   if(principales.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales. Los de Abdomen no cuentan.`);
+   total+=refs.length;
+ }
+ if(!total)return alert('Seleccioná al menos un ejercicio en alguno de los días.');
+ const first=diaEjercicios[dias[0]]||[];
+ const r={id:x||id(),nombre:$("nombreRutina").value.trim(),alumnoId:$("alumnoRutina").value,tipo:$("tipoRutina").value,dias,dia:dias[0],diaEjercicios,ejercicios:first,notas:$("notasRutina").value.trim()};
+ if(x)data.rutinas[data.rutinas.findIndex(z=>z.id===x)]=r;else data.rutinas.push(r);save();$('formRutina').classList.add('hidden');renderRutinas();updateCounts()
+};
+window.editarRutina=function(x){const r=data.rutinas.find(r=>r.id===x);if(!r)return;$("rutinaId").value=r.id;$("nombreRutina").value=r.nombre;$("alumnoRutina").value=r.alumnoId;$("tipoRutina").value=r.tipo||'semanal';$("notasRutina").value=r.notas||'';const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);document.querySelectorAll('.diaSemana').forEach(c=>c.checked=dias.includes(c.value));renderEjerciciosRutina(r.diaEjercicios||Object.fromEntries(dias.map(d=>[d,r.ejercicios||[]])));$("tituloFormRutina").textContent='Editar rutina';$("formRutina").classList.remove('hidden');nav('rutinas')};
+window.borrarRutina=function(x){if(confirm("¿Eliminar esta rutina?")){data.rutinas=data.rutinas.filter(r=>r.id!==x);save();renderRutinas();updateCounts()}};
+function pesoTipoLabel(v){return ({aumento:'Carga en aumento',descenso:'Carga en descenso',estable:'Estable',sugerido:'Sugerido'})[v]||v||''}
 function textoRutina(r){const a=data.alumnos.find(x=>x.id===r.alumnoId);const dias=r.dias?.length?r.dias:(r.dia?[r.dia]:[]);let t=`${perfil.gimnasio||'Entrenadores P.F.'}\n`;if(perfil.profesor)t+=`Entrenador: ${perfil.profesor}\n`;t+=`Alumno: ${a?.nombre||'Sin asignar'}\nRutina: ${r.nombre}\nDías: ${dias.join(', ')}\n\n`;dias.forEach(d=>{t+=`📅 ${d}\n`;normalizarRefs(ejerciciosDelDia(r,d)).map(ref=>({ref,e:data.ejercicios.find(e=>e.id===ref.id)})).filter(x=>x.e).forEach((x,n)=>t+=`${n+1}. ${x.e.nombre} — ${x.e.series||'-'} series x ${x.e.reps||'-'} · Peso ${x.ref.peso||'-'} · Descanso ${x.e.descanso||'-'}\n`);t+='\n'});if(r.notas)t+=`Indicaciones: ${r.notas}`;return t}
 async function construirPDFBlob(x){
  const r=data.rutinas.find(r=>r.id===x); if(!r) throw new Error('Rutina no encontrada');
@@ -256,9 +272,6 @@ async function construirPDFBlob(x){
  text('Alumno:',M,y,9,true); text(a?.nombre||'Sin asignar',M+18,y,9,false);
  if(perfil.profesor){text('Entrenador:',110,y,9,true);text(perfil.profesor,132,y,9,false)} y+=5;
  if(a?.objetivo){text('Objetivo:',M,y,9,true);text(a.objetivo,M+18,y,9,false);y+=5}
- if(a?.patologias){text('Patologías:',M,y,9,true);text(a.patologias,M+25,y,8,false);y+=5}
- if(a?.lesiones){text('Lesiones:',M,y,9,true);text(a.lesiones,M+20,y,8,false);y+=5}
- if(a?.observaciones){text('Observaciones:',M,y,9,true);text(a.observaciones,M+30,y,8,false);y+=5}
  if(r.notas){text('Indicaciones:',M,y,9,true);text(r.notas,M+27,y,9,false);y+=6}
  const widths=[8,57,28,18,25,25,29];
  const headers=['#','Ejercicio','Grupo','Series','Reps','Peso','Descanso'];
@@ -280,7 +293,7 @@ async function construirPDFBlob(x){
    refs.forEach((ref,i)=>{
      const e=data.ejercicios.find(e=>e.id===ref.id); if(!e)return;
      if(y>275){doc.addPage();y=15;header()}
-     row([i+1,e.nombre,e.categoria||'',e.series||'-',e.reps||'-',ref.peso||'-',e.descanso||'-']);
+     row([i+1,e.nombre,e.categoria||'',e.series||'-',ref.reps||e.reps||'-',ref.pesoTipo?`${ref.peso||'-'} (${pesoTipoLabel(ref.pesoTipo)})`:ref.peso||'-',e.descanso||'-']);
    });
    y+=7;
  }
@@ -304,7 +317,7 @@ window.compartirWhatsApp=async function(x){
 $("perfilForm").onsubmit=e=>{e.preventDefault();perfil={profesor:$("nombreProfesor").value.trim(),gimnasio:$("nombreGimnasio").value.trim(),telefono:$("telefonoProfesor").value.trim()};savePerfil();actualizarPerfil();alert("Datos guardados.")};
 function cargarPerfil(){$("nombreProfesor").value=perfil.profesor||"";$("nombreGimnasio").value=perfil.gimnasio||"";$("telefonoProfesor").value=perfil.telefono||"";actualizarPerfil()}
 function actualizarPerfil(){const p=[perfil.profesor,perfil.gimnasio].filter(Boolean);$("encabezadoPerfil").textContent=p.length?p.join(" · "):"Gestión profesional de rutinas para tus alumnos"}
-try{fillCats();cargarPerfil();updateAlumnoSelect();fillRutinaFilters();renderAlumnos();renderEjercicios();renderRutinas();updateCounts()}catch(err){console.error("Error de inicialización",err);try{updateCounts()}catch(e){}}
+try{fillCats();cargarPerfil();renderAlumnos();renderEjercicios();renderRutinas();updateCounts()}catch(err){console.error("Error de inicialización",err);try{updateCounts()}catch(e){}}
 })();
 </script>
 </body>
