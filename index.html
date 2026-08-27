@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores P.F. — v16</title>
+<title>Entrenadores P.F. — v16.1</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -253,6 +253,14 @@ function metaHtml(ref,e,d,ab){
    <input class="peso-input" type="text" data-peso-day="${esc(d)}" data-peso-ex="${e.id}" value="${esc(ref.peso||'')}" placeholder="Kg / carga" aria-label="Peso">
  </div>`;
 }
+function guardarEstadoDia(d){
+ if(!d)return;
+ const refs=collectDayRefs(d);
+ window.__pfPreselected=window.__pfPreselected||{};
+ window.__pfAbPreselected=window.__pfAbPreselected||{};
+ window.__pfPreselected[d]=refs.main;
+ window.__pfAbPreselected[d]=refs.ab;
+}
 function renderDayTabs(dias){
  const tabs=$("diaTabs"); if(!tabs)return;
  const active=window.__pfActiveDay&&dias.includes(window.__pfActiveDay)?window.__pfActiveDay:dias[0]||'';
@@ -260,13 +268,7 @@ function renderDayTabs(dias){
  tabs.innerHTML=dias.map((d,i)=>`<button type="button" class="day-tab ${d===active?'active':''}" data-daytab="${esc(d)}">${esc(d)}<span class="day-counter" id="tabCount_${i}"></span></button>`).join('');
  tabs.querySelectorAll('.day-tab').forEach(b=>b.onclick=()=>{
    const current=window.__pfActiveDay;
-   if(current&&dias.includes(current)){
-     const refs=collectDayRefs(current);
-     window.__pfPreselected=window.__pfPreselected||{};
-     window.__pfAbPreselected=window.__pfAbPreselected||{};
-     window.__pfPreselected[current]=refs.main;
-     window.__pfAbPreselected[current]=refs.ab;
-   }
+   if(current&&dias.includes(current)) guardarEstadoDia(current);
    window.__pfActiveDay=b.dataset.daytab;
    renderEjerciciosRutina(window.__pfPreselected||{});
  });
@@ -307,19 +309,15 @@ function renderEjerciciosRutina(preselected){
      const e=data.ejercicios.find(e=>e.id===ch.value);row.querySelector('.exercise-main').insertAdjacentHTML('beforeend',metaHtml({id:e.id,peso:'',carga:'',repsSeries:e.reps||'',series:(['1','2','3','4'].includes(String(e.series))?String(e.series):'3')},e,d,ch.dataset.ab==='1'));
    }else{
      row.classList.remove('is-selected');const m=row.querySelector('.selected-meta');if(m)m.remove();
-   } actualizarContadores();
+   }
+   guardarEstadoDia(d);
+   actualizarContadores();
  });
  actualizarContadores();
 }
 function diasChange(){
  const current=window.__pfActiveDay;
- if(current){
-   const refs=collectDayRefs(current);
-   window.__pfPreselected=window.__pfPreselected||{};
-   window.__pfAbPreselected=window.__pfAbPreselected||{};
-   window.__pfPreselected[current]=refs.main;
-   window.__pfAbPreselected[current]=refs.ab;
- }
+ if(current) guardarEstadoDia(current);
  const dias=diasSeleccionados();
  if(!dias.includes(window.__pfActiveDay))window.__pfActiveDay=dias[0]||'';
  renderEjerciciosRutina(window.__pfPreselected||{});
@@ -392,7 +390,7 @@ async function construirPDFBlob(x){
    const abs=abdominalesDelDia(r,d);if(abs.length){y+=4;doc.setFillColor(240,239,252);doc.roundedRect(M,y,CW,8,1,1,'F');text('Abdominales',M+3,y+5.5,8,true);y+=9;abs.forEach((ref,i)=>{const e=data.ejercicios.find(e=>e.id===ref.id);if(!e)return;if(y>275){doc.addPage();y=15}row([`A${i+1}`,e.nombre,e.categoria||'',ref.series||e.series||'-',ref.repsSeries||e.reps||'-',`${ref.peso||'-'}${ref.carga?' · '+ref.carga:''}`,e.descanso||'-'])})}
    y+=7;
  }
- doc.setFontSize(7);doc.setTextColor(110,110,110);doc.text('Generado con Entrenadores P.F. · v16',M,289);
+ doc.setFontSize(7);doc.setTextColor(110,110,110);doc.text('Generado con Entrenadores P.F. · v16.1',M,289);
  return {blob:doc.output('blob'),filename:(r.nombre||'rutina')+'.pdf'};
 }
 window.descargarPDF=async function(x){
