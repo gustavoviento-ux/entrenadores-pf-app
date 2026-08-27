@@ -119,19 +119,24 @@ const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const CATS=["Pecho","Espalda","Piernas","Hombros","Bíceps","Tríceps","Abdomen","Glúteos","Cardio","Otros"];
 const ZONE_MAP={"Tren superior":["Pecho","Espalda","Hombros","Bíceps","Tríceps"],"Tren inferior":["Piernas","Glúteos"],"Zona media":["Abdomen"],"Cardio y acondicionamiento":["Cardio"],"Otros":["Otros"]};
 const presets=[
-["Press banca","Pecho","4","8-12","90 s","Controlar la bajada."],["Press inclinado con mancuernas","Pecho","4","8-12","90 s","Recorrido controlado."],["Aperturas con mancuernas","Pecho","3","10-15","60 s","No cerrar bruscamente."],["Press declinado","Pecho","3","8-12","90 s","Controlar el recorrido."],["Press plano con mancuernas","Pecho","4","8-12","90 s","Mantener escápulas estables."],["Press inclinado con barra","Pecho","4","8-10","120 s","Evitar rebotes."],["Cruce de poleas","Pecho","3","12-15","60 s","Juntar las manos con control."],["Peck deck","Pecho","3","10-15","60 s","No llevar hombros hacia adelante."],["Fondos para pecho","Pecho","3","8-12","90 s","Inclinar levemente el torso."],["Flexiones / lagartijas","Pecho","3","10-20","60 s","Cuerpo alineado."],
+["Press banca","Pecho","4","8-12","90 s","Controlar la bajada."],["Press inclinado con mancuernas","Pecho","4","8-12","90 s","Recorrido controlado."],["Aperturas con mancuernas","Pecho","3","10-15","60 s","No cerrar bruscamente."],["Press declinado","Pecho","3","8-12","90 s","Controlar el recorrido."],["Press plano con mancuernas","Pecho","4","8-12","90 s","Mantener escápulas estables."],["Press inclinado con barra","Pecho","4","8-10","120 s","Evitar rebotes."],["Cruce de poleas","Pecho","3","12-15","60 s","Juntar las manos con control."],["Peck deck","Pecho","3","10-15","60 s","No llevar hombros hacia adelante."],["Fondos para pecho","Pecho","3","8-12","90 s","Inclinar levemente el torso."],["Flexiones","Pecho","3","10-20","60 s","Cuerpo alineado."],
 ["Jalón al pecho","Espalda","4","10-12","90 s","Llevar hacia el pecho."],["Remo con barra","Espalda","4","8-10","120 s","Espalda estable."],["Remo sentado","Espalda","3","10-12","90 s","Controlar el regreso."],["Remo con mancuerna","Espalda","3","8-12","90 s","No rotar el torso."],["Remo T","Espalda","4","8-12","120 s","Mantener pecho estable."],["Dominadas","Espalda","4","6-12","120 s","Controlar la bajada."],["Jalón agarre neutro","Espalda","3","10-12","90 s","Tirar con los codos."],["Pullover en polea","Espalda","3","12-15","60 s","Mantener brazos controlados."],["Remo unilateral en polea","Espalda","3","10-12","75 s","No girar el tronco."],["Hiperextensiones","Espalda","3","12-15","60 s","Movimiento controlado."],
-["Sentadilla","Cuádriceps","4","8-10","120 s","Rodillas alineadas."],["Peso muerto rumano","Isquiosurales","4","8-10","120 s","Mantener espalda neutra."],["Curl femoral tumbado","Isquiosurales","3","10-15","60 s","Controlar la fase negativa."],["Curl femoral sentado","Isquiosurales","3","10-15","60 s","Recorrido completo."],["Buenos días","Isquiosurales","3","8-12","90 s","Espalda neutra."],["Peso muerto piernas rígidas","Isquiosurales","3","8-12","120 s","Bisagra de cadera."],["Nordic curl","Isquiosurales","3","6-10","90 s","Controlar la bajada."],["Puente de glúteos","Isquiosurales","3","10-15","60 s","Extender la cadera."],["Curl femoral unilateral","Isquiosurales","3","10-12","60 s","Controlar ambas fases."],
-["Press militar","Hombros","4","8-10","90 s","No arquear la espalda."],["Elevaciones laterales","Hombros","3","12-15","60 s","Subir con control."],["Press Arnold","Hombros","3","8-12","90 s","Recorrido controlado."],["Elevaciones frontales","Hombros","3","10-15","60 s","Evitar impulso."],["Pájaros con mancuernas","Hombros","3","12-15","60 s","Enfocar deltoide posterior."],["Face pull","Hombros","3","12-15","60 s","Llevar hacia la cara."],["Press con mancuernas","Hombros","4","8-12","90 s","Muñecas firmes."],["Elevación lateral en polea","Hombros","3","12-15","60 s","Mantener tensión."],["Remo al mentón","Hombros","3","10-12","75 s","No elevar excesivamente los codos."],["Curl de bíceps","Bíceps","3","10-12","60 s","Sin balanceo."],["Curl martillo","Bíceps","3","10-12","60 s","Muñecas neutras."],["Curl con barra","Bíceps","4","8-12","75 s","Codos quietos."],["Curl inclinado","Bíceps","3","10-12","60 s","Estirar sin rebote."],["Curl predicador","Bíceps","3","10-12","60 s","No despegar brazos."],["Curl en polea baja","Bíceps","3","12-15","60 s","Mantener tensión."],["Curl concentrado","Bíceps","3","10-12","60 s","Movimiento estricto."],["Curl martillo con cuerda","Bíceps","3","10-15","60 s","Controlar la bajada."],
+["Sentadilla","Cuádriceps","4","8-10","120 s","Rodillas alineadas."],["Prensa 45°","Cuádriceps","4","10-12","120 s","No bloquear rodillas."],["Extensión de cuádriceps","Cuádriceps","3","12-15","60 s","Movimiento controlado."],["Sentadilla hack","Cuádriceps","4","8-12","120 s","Bajar con control."],["Zancadas","Cuádriceps","3","10-12","90 s","Paso estable."],["Sentadilla búlgara","Cuádriceps","3","8-12","90 s","Mantener equilibrio."],["Step up","Cuádriceps","3","10-12","75 s","Impulsar con la pierna de apoyo."],["Sentadilla goblet","Cuádriceps","3","10-15","75 s","Torso erguido."],["Prensa unilateral","Cuádriceps","3","10-12","90 s","Controlar cada pierna."],["Extensión unilateral","Cuádriceps","3","12-15","60 s","Sin balanceo."],
+["Peso muerto rumano","Isquiosurales","4","8-10","120 s","Mantener espalda neutra."],["Curl femoral tumbado","Isquiosurales","3","10-15","60 s","Controlar la fase negativa."],["Curl femoral sentado","Isquiosurales","3","10-15","60 s","Recorrido completo."],["Buenos días","Isquiosurales","3","8-12","90 s","Espalda neutra."],["Peso muerto piernas rígidas","Isquiosurales","3","8-12","120 s","Bisagra de cadera."],["Nordic curl","Isquiosurales","3","6-10","90 s","Controlar la bajada."],["Puente de glúteos","Isquiosurales","3","10-15","60 s","Extender la cadera."],["Curl femoral unilateral","Isquiosurales","3","10-12","60 s","Controlar ambas fases."],
+["Press militar","Hombros","4","8-10","90 s","No arquear la espalda."],["Elevaciones laterales","Hombros","3","12-15","60 s","Subir con control."],["Press Arnold","Hombros","3","8-12","90 s","Recorrido controlado."],["Elevaciones frontales","Hombros","3","10-15","60 s","Evitar impulso."],["Pájaros con mancuernas","Hombros","3","12-15","60 s","Enfocar deltoide posterior."],["Face pull","Hombros","3","12-15","60 s","Llevar hacia la cara."],["Press con mancuernas","Hombros","4","8-12","90 s","Muñecas firmes."],["Elevación lateral en polea","Hombros","3","12-15","60 s","Mantener tensión."],["Remo al mentón","Hombros","3","10-12","75 s","No elevar excesivamente los codos."],["Reverse peck deck","Hombros","3","12-15","60 s","Controlar el movimiento."],
+["Curl de bíceps","Bíceps","3","10-12","60 s","Sin balanceo."],["Curl martillo","Bíceps","3","10-12","60 s","Muñecas neutras."],["Curl con barra","Bíceps","4","8-12","75 s","Codos quietos."],["Curl inclinado","Bíceps","3","10-12","60 s","Estirar sin rebote."],["Curl predicador","Bíceps","3","10-12","60 s","No despegar brazos."],["Curl en polea baja","Bíceps","3","12-15","60 s","Mantener tensión."],["Curl concentrado","Bíceps","3","10-12","60 s","Movimiento estricto."],["Curl martillo con cuerda","Bíceps","3","10-15","60 s","Controlar la bajada."],
 ["Tríceps en polea","Tríceps","3","10-15","60 s","Codos quietos."],["Extensión de tríceps","Tríceps","3","10-12","60 s","Controlar el movimiento."],["Press francés","Tríceps","3","8-12","75 s","No abrir excesivamente los codos."],["Extensión sobre la cabeza","Tríceps","3","10-15","60 s","Mantener codos estables."],["Fondos para tríceps","Tríceps","3","8-12","90 s","Controlar la bajada."],["Patada de tríceps","Tríceps","3","12-15","60 s","Sin balanceo."],["Tríceps en polea con cuerda","Tríceps","3","10-15","60 s","Separar la cuerda abajo."],["Press cerrado","Tríceps","4","8-12","90 s","Codos cerca del cuerpo."],
 ["Hip thrust","Glúteos","4","8-12","90 s","Extender cadera."],["Abducción en máquina","Glúteos","3","12-20","60 s","Movimiento controlado."],["Patada de glúteo en polea","Glúteos","3","12-15","60 s","No arquear la espalda."],["Puente de glúteos","Glúteos","3","12-15","60 s","Apretar arriba."],["Sentadilla sumo","Glúteos","4","8-12","120 s","Rodillas acompañan la punta del pie."],["Peso muerto sumo","Glúteos","4","6-10","120 s","Mantener columna neutra."],["Zancada larga","Glúteos","3","10-12","90 s","Paso amplio y estable."],["Abducción en polea","Glúteos","3","12-15","60 s","Controlar el retorno."],["Step up alto","Glúteos","3","8-12","90 s","Empujar con el talón."],["Extensión de cadera en máquina","Glúteos","3","10-15","60 s","Sin hiperextender la espalda."],
 ["Crunch","Abdomen","3","15-20","45 s","No tirar del cuello."],["Plancha","Abdomen","3","30-60 s","45 s","Mantener línea corporal."],["Elevaciones de piernas","Abdomen","3","10-15","45 s","Controlar la bajada."],["Crunch en polea","Abdomen","3","12-15","45 s","Flexionar el tronco."],["Abdominal bicicleta","Abdomen","3","15-20","45 s","Movimiento controlado."],["Plancha lateral","Abdomen","3","30-45 s","45 s","Cadera alineada."],["Dead bug","Abdomen","3","10-12","45 s","Mantener zona lumbar estable."],["Pallof press","Abdomen","3","10-15","45 s","Evitar rotación."],["Mountain climbers","Abdomen","3","20-30","45 s","Ritmo controlado."],["Rueda abdominal","Abdomen","3","6-12","60 s","No arquear la espalda."],
-["Caminata","Cardio","1","20-30 min","-","Ritmo moderado."],["Bicicleta","Cardio","1","20-30 min","-","Ritmo moderado."],["Press convergente en máquina","Pecho","3","8-12","90 s","Controlar el recorrido y mantener escápulas estables."],
+["Caminata","Cardio","1","20-30 min","-","Ritmo moderado."],["Bicicleta","Cardio","1","20-30 min","-","Ritmo moderado."],["Elíptico","Cardio","1","20-30 min","-","Ritmo moderado."],["Remo ergómetro","Cardio","1","15-25 min","-","Ritmo sostenido."],["Cinta inclinada","Cardio","1","15-25 min","-","Mantener ritmo cómodo."],
+["Press convergente en máquina","Pecho","3","8-12","90 s","Controlar el recorrido y mantener escápulas estables."],
 ["Remo con pecho apoyado","Espalda","3","8-12","90 s","Evitar impulso y llevar los codos hacia atrás."],
 ["Hack unilateral","Cuádriceps","3","10-12","90 s","Mantener la rodilla alineada con el pie."],
 ["Curl 90 grados","Bíceps","3","10-12","60 s","Mantener los codos estables."],
 ["Extensión de tríceps unilateral en polea","Tríceps","3","10-15","60 s","Controlar especialmente la vuelta." ]
 ,
+["Press en máquina inclinado","Pecho","3","10-12","90 s","Controlar la bajada."],
+["Aperturas en polea baja","Pecho","3","12-15","60 s","Mantener tensión continua."],
 ["Remo en máquina","Espalda","3","10-12","90 s","No balancear el torso."],
 ["Jalón unilateral","Espalda","3","10-12","75 s","Llevar el codo hacia la cadera."],
 ["Sentadilla en máquina","Cuádriceps","3","10-12","90 s","Controlar profundidad y rodillas."],
@@ -141,25 +146,37 @@ const presets=[
 ["Elevación lateral con mancuernas sentado","Hombros","3","12-15","60 s","Evitar impulso."],
 ["Press de hombros en máquina","Hombros","3","8-12","90 s","Controlar el recorrido."],
 ["Curl spider","Bíceps","3","10-12","60 s","Mantener tensión constante."],
+["Curl en máquina","Bíceps","3","10-15","60 s","Movimiento estricto."],
+["Extensión de tríceps en máquina","Tríceps","3","10-15","60 s","Controlar la vuelta."],
 ["Tríceps unilateral en polea","Tríceps","3","10-15","60 s","Mantener el codo fijo."],
 ["Hip thrust unilateral","Glúteos","3","10-12","75 s","Extender la cadera sin arquear."],
 ["Patada de glúteo en máquina","Glúteos","3","12-15","60 s","Controlar el retorno."],
 ["Crunch inverso","Abdomen","3","12-20","45 s","Elevar la pelvis con control."],
 ["Hollow hold","Abdomen","3","20-40 s","45 s","Mantener abdomen activo."],
 ["Escalador cruzado","Abdomen","3","20-30","45 s","Mantener el tronco estable."],
-["Cruce en polea de arriba hacia abajo","Pecho","3","12-15","60 s","Juntar las manos con control y mantener tensión."],
-["Cruce en polea media","Pecho","3","12-15","60 s","Mantener los brazos controlados y las escápulas estables."],
-["Cruce en polea desde abajo","Pecho","3","12-15","60 s","Elevar los brazos con control sin perder tensión."],
-["Pull over con mancuernas","Espalda","3","10-15","60 s","Mantener los brazos controlados y evitar arquear la espalda."],
+["Bicicleta reclinada","Cardio","1","20-30 min","-","Ritmo moderado y sostenido."],
+["Cruce en polea de arriba hacia abajo","Pecho","3","10-15","60 s","Llevar las manos hacia abajo y al centro con control."],
+["Cruce en polea media","Pecho","3","10-15","60 s","Cruzar las manos al frente manteniendo tensión."],
+["Cruce en polea desde abajo","Pecho","3","10-15","60 s","Elevar los brazos desde abajo hacia el centro con control."],
+["Pull over con mancuernas","Pecho","3","10-15","60 s","Controlar el recorrido y mantener los hombros estables."],
 ["Trote","Cardio","1","15-30 min","-","Mantener un ritmo cómodo y sostenido."],
-["Anillas","Otros","3","8-15","75 s","Mantener el cuerpo estable y controlar el movimiento."],
-["Banco de espinales","Espalda","3","12-15","60 s","Realizar el movimiento de forma controlada y sin hiperextender."],
-["Femorales","Isquiosurales","3","10-15","60 s","Controlar ambas fases del movimiento."],
+["Anillas","Otros","3","8-15","60-90 s","Realizar el ejercicio correspondiente con control y estabilidad."],
+["Banco de espinales","Espalda","3","10-15","60 s","Extender la cadera y mantener la columna controlada."],
+["Femorales","Isquiosurales","3","10-15","60 s","Realizar el trabajo de femorales con movimiento controlado."],
 ["Gemelos","Piernas","3","12-20","60 s","Recorrido completo y controlado."],
-["Abductores","Glúteos","3","12-20","60 s","Separar las piernas con control y mantener tensión."],
-["Cuádriceps","Cuádriceps","3","12-15","60 s","Extender las rodillas con control."],
-["Ejercicios aeróbicos","Cardio","1","20-30 min","-","Realizar a intensidad moderada y sostenida."]
-];
+["Abductores","Glúteos","3","12-20","60 s","Separar las piernas con control y sin impulso."],
+["Cuádriceps","Cuádriceps","3","10-15","60-90 s","Ejercicio de trabajo específico de cuádriceps."],
+["Ejercicios aeróbicos","Cardio","1","20-30 min","-","Seleccionar una modalidad aeróbica y mantener intensidad moderada."],
+["Extensiones / lagartijas","Pecho","3","10-20","60 s","Mantener el cuerpo alineado y controlar el movimiento."]];
+// V15: ejercicios retirados del catálogo. Se ocultan de la biblioteca y de la selección de nuevas rutinas,
+// pero NO se borran de los datos para no romper rutinas existentes que ya los utilicen.
+const REMOVED_EXERCISES=new Set([
+  "prensa en máquina inclinado","prensa en máquina inclinada","aperturas en polea baja",
+  "reverse peck deck","curl en máquina","extensión de tríceps en máquina",
+  "elíptico","cinta","cinta inclinada","remo ergométrico","bicicleta reclinada"
+]);
+const esEjercicioVisible=e=>!REMOVED_EXERCISES.has(String(e?.nombre||"").trim().toLowerCase());
+
 const storage={get(k){try{return window.localStorage.getItem(k)}catch(e){return window.__pfMem?.[k]??null}},set(k,v){try{window.localStorage.setItem(k,v)}catch(e){window.__pfMem=window.__pfMem||{};window.__pfMem[k]=v}}};
 function leerJSON(clave, respaldo){try{const raw=storage.get(clave);return raw?JSON.parse(raw):respaldo}catch(err){return respaldo}}
 const baseData={alumnos:[],ejercicios:[],rutinas:[]};
@@ -175,16 +192,13 @@ if(!perfil||typeof perfil!=="object")perfil=leerJSON(OLD_PROFILE_KEY,basePerfil)
 if(!perfil||typeof perfil!=="object")perfil=leerJSON(LEGACY_PROFILE_KEY,basePerfil);
 const $=id=>document.getElementById(id), save=()=>storage.set(KEY,JSON.stringify(data)), savePerfil=()=>storage.set(PROFILE_KEY,JSON.stringify(perfil));
 // Biblioteca inicial: agrega todos los ejercicios base que falten sin borrar los personalizados.
-const CATALOGO_OCULTOS=new Set(['prensa 45°','press en máquina inclinado','aperturas en polea baja','reverse peck deck','curl en máquina','extensión de tríceps en máquina','elíptico','remo ergómetro','bicicleta reclinada']);
-const CATALOGO_RENOMBRES={'flexiones':'Flexiones / lagartijas'};
-for(const e of data.ejercicios){const k=String(e.nombre||'').trim().toLowerCase();if(CATALOGO_RENOMBRES[k])e.nombre=CATALOGO_RENOMBRES[k]}
 const presetNames=new Set(data.ejercicios.map(e=>String(e.nombre||"").trim().toLowerCase()));
 for(const p of presets){const nombre=p[0].trim().toLowerCase();if(!presetNames.has(nombre)){data.ejercicios.push({id:id(),nombre:p[0],categoria:p[1],series:p[2],reps:p[3],descanso:p[4],indicaciones:p[5],imagen:""});presetNames.add(nombre)}}
 save();
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function nav(view){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(view).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="rutinas")renderRutinas();if(view==="alumnos")renderAlumnos();if(view==="ejercicios")renderEjercicios()}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>nav(b.dataset.view));
-function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;$("countEjercicios").textContent=data.ejercicios.length;if($("bibliotecaTotal"))$("bibliotecaTotal").textContent=`(${data.ejercicios.length} ejercicios)`}
+function updateCounts(){$("countAlumnos").textContent=data.alumnos.length;$("countRutinas").textContent=data.rutinas.length;const visibles=data.ejercicios.filter(esEjercicioVisible).length;$("countEjercicios").textContent=visibles;if($("bibliotecaTotal"))$("bibliotecaTotal").textContent=`(${visibles} ejercicios)`}
 function renderAlumnos(){const box=$("listaAlumnos");box.innerHTML=data.alumnos.length?data.alumnos.map(a=>`<div class="card"><h3>${esc(a.nombre)}</h3><div class="muted">${a.edad?esc(a.edad)+" años · ":""}${esc(a.objetivo||"Sin objetivo")}</div><p>${a.telefono?esc(a.telefono):""}</p><div class="actions"><button onclick="editarAlumno('${a.id}')">Editar</button><button class="danger" onclick="borrarAlumno('${a.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">Todavía no cargaste alumnos.</div>';updateAlumnoSelect()}
 function updateAlumnoSelect(){$("alumnoRutina").innerHTML='<option value="">Seleccionar alumno</option>'+data.alumnos.map(a=>`<option value="${a.id}">${esc(a.nombre)}</option>`).join("")}
 $("btnNuevoAlumno").onclick=()=>{resetAlumno();$("formAlumno").classList.remove("hidden")};
@@ -195,7 +209,7 @@ window.borrarAlumno=function(x){if(confirm("¿Eliminar este alumno?")){data.alum
 $("alumnoForm").onsubmit=e=>{e.preventDefault();const x=$("alumnoId").value;const a={id:x||id(),nombre:$("nombreAlumno").value.trim(),telefono:$("telefonoAlumno").value.trim(),edad:$("edadAlumno").value,objetivo:$("objetivoAlumno").value.trim()};if(x){const i=data.alumnos.findIndex(z=>z.id===x);data.alumnos[i]=a}else data.alumnos.push(a);save();resetAlumno();$("formAlumno").classList.add("hidden");renderAlumnos();updateCounts()};
 
 function fillCats(){const opts=CATS.map(c=>`<option>${c}</option>`).join("");$("categoriaEjercicio").innerHTML=opts;$("filtroCategoria").innerHTML='<option value="">Todas las zonas</option>'+opts}
-function renderEjercicios(){const q=$("buscarEjercicio").value.toLowerCase().trim(),cat=$("filtroCategoria").value;const list=data.ejercicios.filter(e=>!CATALOGO_OCULTOS.has(String(e.nombre||"").trim().toLowerCase())&&(!q||e.nombre.toLowerCase().includes(q))&&(!cat||e.categoria===cat));$("listaEjercicios").innerHTML=list.length?list.map(e=>`<div class="card">${e.imagen?`<img class="exercise-img" src="${e.imagen}" alt="">`:""}<h3>${esc(e.nombre)}</h3><div class="muted">${esc(e.categoria)} · ${esc(e.series||"-")} series · ${esc(e.reps||"-")} reps · ${esc(e.descanso||"-")}</div><p>${esc(e.indicaciones||"")}</p><div class="actions"><button onclick="editarEjercicio('${e.id}')">Editar</button><button class="danger" onclick="borrarEjercicio('${e.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">No hay ejercicios que coincidan.</div>';updateCounts()}
+function renderEjercicios(){const q=$("buscarEjercicio").value.toLowerCase().trim(),cat=$("filtroCategoria").value;const list=data.ejercicios.filter(e=>esEjercicioVisible(e)&&(!q||e.nombre.toLowerCase().includes(q))&&(!cat||e.categoria===cat));$("listaEjercicios").innerHTML=list.length?list.map(e=>`<div class="card">${e.imagen?`<img class="exercise-img" src="${e.imagen}" alt="">`:""}<h3>${esc(e.nombre)}</h3><div class="muted">${esc(e.categoria)} · ${esc(e.series||"-")} series · ${esc(e.reps||"-")} reps · ${esc(e.descanso||"-")}</div><p>${esc(e.indicaciones||"")}</p><div class="actions"><button onclick="editarEjercicio('${e.id}')">Editar</button><button class="danger" onclick="borrarEjercicio('${e.id}')">Eliminar</button></div></div>`).join(""):'<div class="notice">No hay ejercicios que coincidan.</div>';updateCounts()}
 $("buscarEjercicio").oninput=renderEjercicios;$("filtroCategoria").onchange=renderEjercicios;
 $("btnNuevoEjercicio").onclick=()=>{resetEjercicio();$("formEjercicio").classList.remove("hidden")};$("cancelarEjercicio").onclick=()=>$("formEjercicio").classList.add("hidden");
 function resetEjercicio(){$("ejercicioForm").reset();$("ejercicioId").value="";$("vistaImagen").innerHTML="";$("tituloFormEjercicio").textContent="Nuevo ejercicio"}
@@ -218,7 +232,7 @@ function renderEjerciciosRutina(preselected){
   const box=$("ejerciciosSeleccionados");
   if(!dias.length){box.innerHTML='<div class="notice">Marcá primero uno o más días de entrenamiento.</div>';return}
   const groups={};
-  data.ejercicios.filter(e=>!CATALOGO_OCULTOS.has(String(e.nombre||"").trim().toLowerCase())).forEach(e=>(groups[e.categoria]??=[]).push(e));
+  data.ejercicios.filter(esEjercicioVisible).forEach(e=>(groups[e.categoria]??=[]).push(e));
   const catsInZone=(zoneCats)=>zoneCats.filter(cat=>groups[cat]?.length);
   box.innerHTML=dias.map(d=>{
     const selected=normalizarRefs((preselected&&preselected[d])||[]);
