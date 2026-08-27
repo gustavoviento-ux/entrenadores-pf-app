@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrenadores P.F. — v16.1</title>
+<title>Entrenadores P.F. — v16.2</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--text:#151827;--muted:#6b7280;--primary:#17152f;--primary2:#30236b;--accent:#7c3aed;--accent2:#06b6d4;--danger:#dc2626;--border:#e8eaf1;--shadow:0 10px 30px rgba(31,24,72,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}h1,h2,h3,.logo{font-family:Montserrat,Inter,Arial,sans-serif}
@@ -313,6 +313,12 @@ function renderEjerciciosRutina(preselected){
    guardarEstadoDia(d);
    actualizarContadores();
  });
+ // Guardar también cualquier cambio en series, repeticiones, carga o peso
+ // para que el estado del día no dependa de volver a cambiar de pestaña.
+ box.querySelectorAll('.series-input,.reps-input,.carga-input,.peso-input').forEach(inp=>{
+   inp.addEventListener('input',()=>guardarEstadoDia(d));
+   inp.addEventListener('change',()=>guardarEstadoDia(d));
+ });
  actualizarContadores();
 }
 function diasChange(){
@@ -340,15 +346,22 @@ $("rutinaForm").onsubmit=e=>{
  e.preventDefault();const x=$("rutinaId").value;const dias=diasSeleccionados();
  if(!$("alumnoRutina").value)return alert('Seleccioná un alumno.');
  if(!dias.length)return alert('Seleccioná al menos un día de la semana.');
+ // Antes de guardar, conservar el día que está visible y usar el estado
+ // previamente guardado para todos los demás días.
+ if(window.__pfActiveDay&&dias.includes(window.__pfActiveDay))guardarEstadoDia(window.__pfActiveDay);
  const diaEjercicios={};const abdominalesPorDia={};let total=0;
+ // El formulario solo muestra un día a la vez; los demás viven en estos estados.
+ window.__pfPreselected=window.__pfPreselected||{};
+ window.__pfAbPreselected=window.__pfAbPreselected||{};
  for(const d of dias){
-   const refs=collectDayRefs(d);
-   if(refs.main.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales.`);
-   diaEjercicios[d]=refs.main;abdominalesPorDia[d]=refs.ab;total+=refs.main.length+refs.ab.length;
+   const refs=(d===window.__pfActiveDay)?collectDayRefs(d):{main:(window.__pfPreselected&&window.__pfPreselected[d])||[],ab:(window.__pfAbPreselected&&window.__pfAbPreselected[d])||[]};
+   const main=normalizarRefs(refs.main);const ab=normalizarRefs(refs.ab);
+   if(main.length>6)return alert(`En ${d} podés usar hasta 6 ejercicios principales.`);
+   diaEjercicios[d]=main;abdominalesPorDia[d]=ab;total+=main.length+ab.length;
  }
  if(!total)return alert('Seleccioná al menos un ejercicio en alguno de los días.');
  const first=diaEjercicios[dias[0]]||[];
- const r={id:x||id(),nombre:$("nombreRutina").value.trim(),alumnoId:$("alumnoRutina").value,tipo:$("tipoRutina").value,dias:[...dias],dia:dias[0],diaEjercicios:{...diaEjercicios},abdominalesPorDia:{...abdominalesPorDia},ejercicios:first,notas:$("notasRutina").value.trim()};
+ const r={id:x||id(),nombre:$('nombreRutina').value.trim(),alumnoId:$('alumnoRutina').value,tipo:$('tipoRutina').value,dias:[...dias],dia:dias[0],diaEjercicios:{...diaEjercicios},abdominalesPorDia:{...abdominalesPorDia},ejercicios:first,notas:$('notasRutina').value.trim()};
  if(x)data.rutinas[data.rutinas.findIndex(z=>z.id===x)]=r;else data.rutinas.push(r);save();$('formRutina').classList.add('hidden');renderRutinas();updateCounts()
 };
 window.editarRutina=function(x){
